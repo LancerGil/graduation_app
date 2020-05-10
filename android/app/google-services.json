@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "57286735694",
+    "firebase_url": "https://porjectforgra.firebaseio.com",
+    "project_id": "porjectforgra",
+    "storage_bucket": "porjectforgra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57286735694:android:f5232b8987e627f53f101f",
+        "android_client_info": {
+          "package_name": "com.example.graduationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57286735694-uoic31usuiust3r1iidathl5tgm9vek9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ_KTCxbtWHNT9tUl8m1zTOy38ZuxJv_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57286735694-uoic31usuiust3r1iidathl5tgm9vek9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

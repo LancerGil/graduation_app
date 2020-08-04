@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class HWQuestion {
   final int id, hwID, stuID;
   final String question, answer;
@@ -22,5 +24,29 @@ class HWQuestion {
         );
     }
     return list;
+  }
+
+  static fromSnapshot(DocumentSnapshot snapshot) {
+    var data = snapshot.data;
+
+    return HWQuestion(
+      data['id'],
+      data['hwID'],
+      data['stuID'],
+      data['question'],
+      data['answer'],
+      DateTime.parse(data['updateAt']),
+    );
+  }
+
+  Map<String, dynamic> tojson() {
+    return {
+      'id': id,
+      'hwID': hwID,
+      'stuID': stuID,
+      'question': question,
+      'answer': answer,
+      'updateAt': updateAt.toString(),
+    };
   }
 }

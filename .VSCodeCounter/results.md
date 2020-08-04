@@ -1,25 +1,25 @@
 # Summary
 
-Date : 2020-04-27 23:33:41
+Date : 2020-05-31 12:11:02
 
 Directory /home/soi/Documents/GraduationProgram/Programs/graduation_app
 
-Total : 100 files,  6528 codes, 402 comments, 643 blanks, all 7573 lines
+Total : 108 files,  7776 codes, 409 comments, 801 blanks, all 8986 lines
 
 [details](details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| Dart | 56 | 5,027 | 172 | 407 | 5,606 |
+| Dart | 63 | 6,226 | 181 | 565 | 6,972 |
 | XML | 16 | 446 | 105 | 63 | 614 |
 | Java | 4 | 295 | 9 | 39 | 343 |
 | Objective-C | 1 | 249 | 27 | 17 | 293 |
-| JSON | 2 | 145 | 0 | 2 | 147 |
-| Groovy | 6 | 128 | 7 | 30 | 165 |
+| JSON | 3 | 185 | 0 | 2 | 187 |
+| Groovy | 6 | 133 | 7 | 30 | 170 |
 | Markdown | 4 | 77 | 0 | 40 | 117 |
 | Batch | 1 | 61 | 0 | 24 | 85 |
-| YAML | 2 | 41 | 74 | 13 | 128 |
+| YAML | 2 | 45 | 72 | 13 | 130 |
 | Ruby | 1 | 22 | 5 | 2 | 29 |
 | Swift | 1 | 12 | 0 | 2 | 14 |
 | Properties | 3 | 11 | 1 | 2 | 14 |
@@ -29,9 +29,9 @@ Total : 100 files,  6528 codes, 402 comments, 643 blanks, all 7573 lines
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 100 | 6,528 | 402 | 643 | 7,573 |
-| android | 12 | 155 | 39 | 30 | 224 |
-| android/app | 7 | 105 | 38 | 19 | 162 |
+| . | 108 | 7,776 | 409 | 801 | 8,986 |
+| android | 13 | 200 | 39 | 30 | 269 |
+| android/app | 8 | 149 | 38 | 19 | 206 |
 | android/app/src | 6 | 51 | 35 | 7 | 93 |
 | android/app/src/debug | 1 | 4 | 3 | 1 | 8 |
 | android/app/src/main | 4 | 43 | 29 | 5 | 77 |
@@ -48,25 +48,24 @@ Total : 100 files,  6528 codes, 402 comments, 643 blanks, all 7573 lines
 | ios/Runner/Assets.xcassets/AppIcon.appiconset | 1 | 122 | 0 | 1 | 123 |
 | ios/Runner/Assets.xcassets/LaunchImage.imageset | 2 | 26 | 0 | 3 | 29 |
 | ios/Runner/Base.lproj | 2 | 61 | 2 | 2 | 65 |
-| lib | 54 | 4,961 | 65 | 398 | 5,424 |
-| lib/custom_widgets | 3 | 100 | 0 | 18 | 118 |
-| lib/models | 11 | 337 | 0 | 56 | 393 |
-| lib/screens | 36 | 4,185 | 63 | 300 | 4,548 |
-| lib/screens/home | 12 | 1,567 | 23 | 103 | 1,693 |
-| lib/screens/home/tab_homework | 2 | 175 | 2 | 13 | 190 |
-| lib/screens/home/tab_lesson | 3 | 646 | 6 | 38 | 690 |
-| lib/screens/home/tab_user | 4 | 551 | 15 | 30 | 596 |
-| lib/screens/homework_details | 7 | 1,214 | 9 | 79 | 1,302 |
-| lib/screens/homework_details/for_tea.dart | 1 | 13 | 0 | 3 | 16 |
-| lib/screens/lesson | 11 | 873 | 10 | 85 | 968 |
-| lib/screens/lesson/group | 7 | 570 | 9 | 56 | 635 |
-| lib/screens/lesson/group/group_for_stu | 5 | 425 | 8 | 40 | 473 |
+| lib | 61 | 6,160 | 74 | 556 | 6,790 |
+| lib/custom_widgets | 6 | 207 | 2 | 34 | 243 |
+| lib/models | 11 | 497 | 1 | 75 | 573 |
+| lib/screens | 36 | 5,046 | 65 | 380 | 5,491 |
+| lib/screens/home | 12 | 1,855 | 22 | 129 | 2,006 |
+| lib/screens/home/tab_homework | 2 | 175 | 2 | 14 | 191 |
+| lib/screens/home/tab_lesson | 3 | 905 | 4 | 62 | 971 |
+| lib/screens/home/tab_user | 4 | 571 | 16 | 32 | 619 |
+| lib/screens/homework_details | 7 | 1,408 | 9 | 93 | 1,510 |
+| lib/screens/homework_details/for_tea.dart | 1 | 138 | 0 | 10 | 148 |
+| lib/screens/lesson | 11 | 979 | 9 | 97 | 1,085 |
+| lib/screens/lesson/group | 7 | 569 | 9 | 56 | 634 |
+| lib/screens/lesson/group/group_for_stu | 5 | 424 | 8 | 40 | 472 |
 | lib/screens/lesson/group/group_for_tea | 2 | 145 | 1 | 16 | 162 |
-| lib/screens/login | 3 | 183 | 9 | 17 | 209 |
-| lib/screens/setting | 1 | 220 | 8 | 4 | 232 |
-| lib/screens/sign_up | 1 | 128 | 4 | 11 | 143 |
-| lib/screens/start | 1 | 0 | 0 | 1 | 1 |
-| lib/utils | 1 | 57 | 1 | 10 | 68 |
+| lib/screens/login | 4 | 413 | 16 | 40 | 469 |
+| lib/screens/setting | 1 | 236 | 8 | 6 | 250 |
+| lib/screens/sign_up | 1 | 155 | 1 | 15 | 171 |
+| lib/utils | 5 | 180 | 5 | 48 | 233 |
 | plugin | 24 | 1,139 | 244 | 185 | 1,568 |
 | plugin/flutter_umengshare | 24 | 1,139 | 244 | 185 | 1,568 |
 | plugin/flutter_umengshare/android | 16 | 725 | 81 | 126 | 932 |

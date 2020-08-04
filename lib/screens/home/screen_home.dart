@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   var appBarTitle = ['课程', '作业', '我的'];
   TabController _tabController;
+  List<int> lessonID;
 
   @override
   void initState() {
@@ -33,8 +34,10 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          TabLessonAtHome(),
-          TabHWatHome(),
+          TabLessonAtHome(setLessonIDCallBack: setLessonIDCallBack),
+          TabHWatHome(
+            lessonID: lessonID,
+          ),
           TabUserPage(),
         ],
       ),
@@ -60,5 +63,14 @@ class _HomePageState extends State<HomePage>
         ],
       ),
     );
+  }
+
+  setLessonIDCallBack(List<int> lessonID) {
+    if (this.lessonID == null || this.lessonID.length != lessonID.length) {
+      setState(() {
+        this.lessonID = lessonID;
+      });
+      print("setting lessonID:----------${this.lessonID}");
+    }
   }
 }

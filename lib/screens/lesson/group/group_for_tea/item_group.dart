@@ -36,10 +36,12 @@ class _ItemGroupsState extends State<ItemGroups>
                   offset: Offset(0, 0),
                   blurRadius: folded ? 0 : 16.0)
             ],
-            border: Border(
-              top: BorderSide(color: Colors.grey),
-              bottom: BorderSide(color: Colors.grey),
-            )),
+            border: folded
+                ? null
+                : Border(
+                    top: BorderSide(color: Colors.grey),
+                    bottom: BorderSide(color: Colors.grey),
+                  )),
         duration: duration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

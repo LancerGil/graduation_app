@@ -1,11 +1,20 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:graduationapp/models/app_model.dart';
 import 'package:graduationapp/models/lesson_home.dart';
 import 'package:graduationapp/models/lesson_time.dart';
+import 'package:graduationapp/models/user.dart';
+import 'package:graduationapp/utils/firebase_store.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CreateLessonPage extends StatefulWidget {
+  final User user;
+
+  const CreateLessonPage({Key key, this.user}) : super(key: key);
+
   @override
   _CreateLessonPageState createState() => _CreateLessonPageState();
 }
@@ -19,7 +28,9 @@ class _CreateLessonPageState extends State<CreateLessonPage>
       lessonPlanCon;
   List<LessonTime> _myLessonsNumPerweek;
   StreamController<List<LessonTime>> _events;
-  LessonNow lessonCreating;
+  Lesson lessonCreating;
+  FireBaseStore fireBaseStore;
+  bool isHandling = false;
 
   @override
   void initState() {
@@ -33,6 +44,7 @@ class _CreateLessonPageState extends State<CreateLessonPage>
     lessonTargetCon = TextEditingController();
     _events = new StreamController<List<LessonTime>>();
     _events.add(_myLessonsNumPerweek);
+    fireBaseStore = FireBaseStore();
   }
 
   @override
@@ -67,13 +79,15 @@ class _CreateLessonPageState extends State<CreateLessonPage>
   }
 
   _updateLessonCreatingModel(context) {
-    // ScopedModel.of<AppModel>(context).setLesson(lessonCreating);
+    ScopedModel.of<AppModel>(context).setLessonCreating(lessonCreating);
+    print("creating Lesson: ------ ${lessonCreating.toJson()}");
   }
 
   @override
   Widget build(BuildContext context) {
-    // lessonCreating =
-    //     ScopedModel.of<AppModel>(context, rebuildOnChange: true).lesson;
+    lessonCreating = AppModel.of(context, rebuildOnChange: true).lessonCreating;
+    User user = widget.user;
+
     if (lessonCreating != null) {
       setState(() {
         lessonNameCon.text = lessonCreating.lessonName;
@@ -86,8 +100,10 @@ class _CreateLessonPageState extends State<CreateLessonPage>
         _events.add(_myLessonsNumPerweek);
       });
     } else {
-      lessonCreating =
-          LessonNow(0, "", "", "", 1, "", "", "", 1, 1, [LessonTime()]);
+      lessonCreating = Lesson(
+          "", "22", user.userId, 0, "", "", "", 1, 1, [LessonTime()],
+          lessonID:
+              new Random(DateTime.now().second).nextInt(Lesson.MAX_LESSON_ID));
     }
 
     var appbar = AppBar(
@@ -104,7 +120,7 @@ class _CreateLessonPageState extends State<CreateLessonPage>
               actions: <Widget>[
                 FlatButton(
                   onPressed: () {
-                    // ScopedModel.of<AppModel>(context).setLesson(null);
+                    ScopedModel.of<AppModel>(context).setLessonCreating(null);
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
                   },
@@ -125,7 +141,7 @@ class _CreateLessonPageState extends State<CreateLessonPage>
       actions: <Widget>[
         GestureDetector(
           onTap: () {
-            //TODO:提交创建课程请求。
+            handleCreateLesson();
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -137,167 +153,164 @@ class _CreateLessonPageState extends State<CreateLessonPage>
         )
       ],
     );
-    var body = SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-              controller: lessonNameCon,
-              onChanged: (text) {
-                lessonCreating.lessonName = text;
-                _updateLessonCreatingModel(context);
-              },
-              style: Theme.of(context).textTheme.bodyText2,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: '课程名称'),
-            ),
-            SizedBox(height: 10),
-            Divider(),
-            Text(
-              '上课时间',
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-            SizedBox(height: 5),
-            Row(
-              children: <Widget>[
-                Text('开课区间：'),
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    _showWeekPicker(context, 1, 24, startAtWeek);
-                  },
-                  child: Text(
-                    '第 $startAtWeek 周',
-                    style: Theme.of(context).textTheme.headline4,
+    var body = isHandling
+        ? loadingScreen()
+        : SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextField(
+                    controller: lessonNameCon,
+                    onChanged: (text) {
+                      lessonCreating.lessonName = text;
+                      _updateLessonCreatingModel(context);
+                    },
+                    style: Theme.of(context).textTheme.bodyText2,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(), labelText: '课程名称'),
                   ),
-                ),
-                Text(' — '),
-                GestureDetector(
-                  onTap: () {
-                    _showWeekPicker(context, startAtWeek, 25, startAtWeek);
-                  },
-                  child: Text(
-                    '第 $finishAtWeek 周',
-                    style: Theme.of(context).textTheme.headline4,
+                  SizedBox(height: 10),
+                  Divider(),
+                  Text(
+                    '上课时间',
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              '每周上课时间',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            AnimatedContainer(
-              curve: Curves.easeOutCirc,
-              decoration: BoxDecoration(
-                border: Border(
-                    // top: BorderSide(color: Colors.grey),
-                    // bottom: BorderSide(color: Colors.grey),
+                  SizedBox(height: 5),
+                  Row(
+                    children: <Widget>[
+                      Text('开课区间：'),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          _showWeekPicker(context, 1, 24, startAtWeek);
+                        },
+                        child: Text(
+                          '第 $startAtWeek 周',
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                      ),
+                      Text(' — '),
+                      GestureDetector(
+                        onTap: () {
+                          _showWeekPicker(
+                              context, startAtWeek, 25, startAtWeek);
+                        },
+                        child: Text(
+                          '第 $finishAtWeek 周',
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '每周上课时间',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  AnimatedContainer(
+                    curve: Curves.easeOutCirc,
+                    duration: Duration(milliseconds: 500),
+                    child: AnimatedSize(
+                      curve: Curves.easeOutCirc,
+                      duration: Duration(milliseconds: 500),
+                      vsync: this,
+                      child: StreamBuilder<List<LessonTime>>(
+                        stream: _events.stream,
+                        builder: (context, snapshot) {
+                          return Column(
+                            children: snapshot.data
+                                .map((f) => ItemLessonTime(
+                                      index: snapshot.data.indexOf(f),
+                                      lessonTime: f,
+                                      deleteThis: _deleteLessonPerWeek,
+                                      updateThis: _updateLessonPerWeek,
+                                    ))
+                                .toList(),
+                          );
+                        },
+                      ),
                     ),
+                  ),
+                  SizedBox(height: 8.0),
+                  Center(
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      color: Theme.of(context).primaryColor,
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        _incrementLessonPerWeek(context);
+                      },
+                    ),
+                  ),
+                  Divider(),
+                  Text(
+                    '课程简介',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  SizedBox(height: 8),
+                  TextField(
+                    onChanged: (text) {
+                      lessonCreating.lessonIntro = text;
+                      _updateLessonCreatingModel(context);
+                    },
+                    controller: lessonIntroCon,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '简单介绍课程......',
+                    ),
+                    maxLines: 3,
+                  ),
+                  Divider(),
+                  Text(
+                    '教学目标',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  SizedBox(height: 8),
+                  TextField(
+                    onChanged: (text) {
+                      lessonCreating.lessonTarget = text;
+                      _updateLessonCreatingModel(context);
+                    },
+                    controller: lessonTargetCon,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '课程的教学目标......',
+                    ),
+                    maxLines: 6,
+                  ),
+                  Divider(),
+                  Text(
+                    '教学计划',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  SizedBox(height: 8),
+                  TextField(
+                    onChanged: (text) {
+                      lessonCreating.lessonPlan = text;
+                      _updateLessonCreatingModel(context);
+                    },
+                    controller: lessonPlanCon,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '第一周...\n第二周...',
+                    ),
+                    maxLines: 6,
+                  ),
+                ],
               ),
-              duration: Duration(milliseconds: 500),
-              child: AnimatedSize(
-                curve: Curves.easeOutCirc,
-                duration: Duration(milliseconds: 500),
-                vsync: this,
-                child: StreamBuilder<List<LessonTime>>(
-                  stream: _events.stream,
-                  builder: (context, snapshot) {
-                    return Column(
-                      children: snapshot.data
-                          .map((f) => ItemLessonTime(
-                                index: snapshot.data.indexOf(f),
-                                lessonTime: f,
-                                deleteThis: _deleteLessonPerWeek,
-                                updateThis: _updateLessonPerWeek,
-                              ))
-                          .toList(),
-                    );
-                  },
-                ),
-              ),
             ),
-            SizedBox(height: 8.0),
-            Center(
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
-                color: Theme.of(context).primaryColor,
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  _incrementLessonPerWeek(context);
-                },
-              ),
-            ),
-            Divider(),
-            Text(
-              '课程简介',
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-            SizedBox(height: 8),
-            TextField(
-              onChanged: (text) {
-                lessonCreating.lessonIntro = text;
-                _updateLessonCreatingModel(context);
-              },
-              controller: lessonIntroCon,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: '简单介绍课程......',
-              ),
-              maxLines: 3,
-            ),
-            Divider(),
-            Text(
-              '教学目标',
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-            SizedBox(height: 8),
-            TextField(
-              onChanged: (text) {
-                lessonCreating.lessonTarget = text;
-                _updateLessonCreatingModel(context);
-              },
-              controller: lessonTargetCon,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: '课程的教学目标......',
-              ),
-              maxLines: 6,
-            ),
-            Divider(),
-            Text(
-              '教学计划',
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-            SizedBox(height: 8),
-            TextField(
-              onChanged: (text) {
-                lessonCreating.lessonPlan = text;
-                _updateLessonCreatingModel(context);
-              },
-              controller: lessonPlanCon,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: '第一周...\n第二周...',
-              ),
-              maxLines: 6,
-            ),
-          ],
-        ),
-      ),
-    );
+          );
 
     return Scaffold(appBar: appbar, body: body);
   }
@@ -331,6 +344,71 @@ class _CreateLessonPageState extends State<CreateLessonPage>
         setState(() {});
       }
     });
+  }
+
+  void handleCreateLesson() async {
+    setState(() {
+      isHandling = true;
+    });
+    lessonCreating = AppModel.of(context, rebuildOnChange: true).lessonCreating;
+    ensureLessonIDUnique().then((value) {
+      fireBaseStore.addDocument('lesson', lessonCreating.toJson());
+      _showLessonCode();
+    });
+  }
+
+  _showLessonCode() {
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        title: Text('使用课程码邀请学生加入课程：'),
+        content: Text(
+          lessonCreating.lessonID.toString(),
+          style: Theme.of(context).textTheme.headline4,
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            child: Text('确定'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<Lesson> ensureLessonIDUnique() async {
+    if (await checkIfExsit()) {
+      lessonCreating.lessonID =
+          new Random(new DateTime.now().second).nextInt(Lesson.MAX_LESSON_ID);
+      ensureLessonIDUnique();
+    } else
+      return lessonCreating;
+  }
+
+  Future<bool> checkIfExsit() async {
+    return await fireBaseStore
+        .queryDocuments(
+            'lesson', MapEntry(Lesson.LESSON_FEILD[1], lessonCreating.lessonID))
+        .then((value) => value.documents != null);
+  }
+
+  loadingScreen() {
+    return Container(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(
+              height: 10,
+            ),
+            Text('正在处理...'),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -370,7 +448,7 @@ class _ItemLessonTimeState extends State<ItemLessonTime> {
           Text('星期'),
           GestureDetector(
             onTap: () {
-              widget.lessonTime.setWeekDay(weekDay++ % 7);
+              widget.lessonTime.setWeekDay(value: weekDay++ % 7);
               widget.updateThis(context, widget.index, widget.lessonTime);
             },
             child: Text(

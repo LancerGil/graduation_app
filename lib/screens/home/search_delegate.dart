@@ -48,8 +48,8 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     final queryLow = query.toLowerCase();
-    if (data.isNotEmpty) {
-      if (data[0] is LessonNow) {
+    if (data != null && data.isNotEmpty) {
+      if (data[0] is Lesson) {
         suggestionList = query.isEmpty
             ? data
             : data
@@ -62,7 +62,7 @@ class CustomSearchDelegate extends SearchDelegate {
                   .where((p) => p.lessonTea.toLowerCase().contains(queryLow))
                   .toList();
         }
-      } else if (data[0] is HwAtHome) {
+      } else if (data[0] is Homework) {
         suggestionList = query.isEmpty
             ? data
             : data
@@ -72,7 +72,7 @@ class CustomSearchDelegate extends SearchDelegate {
           suggestionList = query.isEmpty
               ? data
               : data
-                  .where((p) => p.hwLesson.toLowerCase().contains(queryLow))
+                  .where((p) => p.hwLessonID.toLowerCase().contains(queryLow))
                   .toList();
         }
       }
@@ -82,7 +82,7 @@ class CustomSearchDelegate extends SearchDelegate {
       user: user,
       child: ListView(
           children: suggestionList
-              .map((e) => e is HwAtHome ? ItemHomeworkNow(e) : ItemLessonNow(e))
+              .map((e) => e is Homework ? ItemHomeworkNow(e) : ItemLessonNow(e))
               .toList()),
     );
   }

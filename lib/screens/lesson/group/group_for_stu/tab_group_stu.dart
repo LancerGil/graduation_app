@@ -16,13 +16,13 @@ class _TabGroupForStuState extends State<TabGroupForStu> {
   static const int JOIN_GROUP = 4;
   static const int EDIT_GROUP = 5;
 
-  List<StudentCard> groupMem;
+  List<LessonStu> groupMem;
   String groupName;
 
   @override
   void initState() {
     super.initState();
-    groupMem = StudentCard.fetchAll([1, 2, 3, 4]);
+    groupMem = LessonStu.fetchAll([1, 2, 3, 4]);
     groupName = 'dfadfsd';
     // groupName.write('objfdd');
   }
@@ -66,7 +66,7 @@ class _TabGroupForStuState extends State<TabGroupForStu> {
     var body = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: ListView(
-        children: buildStudentWidgets(LessonNow.classID),
+        children: buildStudentWidgets(Lesson.classID),
       ),
     );
     return Scaffold(appBar: appbar, body: body);
@@ -93,7 +93,7 @@ class _TabGroupForStuState extends State<TabGroupForStu> {
   }
 
   showManageGroupDialog(title) {
-    showDialog<List<StudentCard>>(
+    showDialog<List<LessonStu>>(
         context: context,
         builder: (context) {
           return AlertDialog(

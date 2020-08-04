@@ -1,10 +1,19 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:graduationapp/models/app_model.dart';
 import 'package:graduationapp/models/hw_home.dart';
+import 'package:graduationapp/models/lesson_home.dart';
+import 'package:graduationapp/utils/firebase_store.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CreateHWPage extends StatefulWidget {
-  final HwAtHome homework;
+  final Homework homework;
+  final Lesson currentLesson;
 
-  const CreateHWPage({Key key, this.homework}) : super(key: key);
+  const CreateHWPage({Key key, this.homework, this.currentLesson})
+      : super(key: key);
 
   @override
   _CreateHWPageState createState() => _CreateHWPageState();
@@ -13,39 +22,28 @@ class CreateHWPage extends StatefulWidget {
 class _CreateHWPageState extends State<CreateHWPage>
     with SingleTickerProviderStateMixin {
   TextEditingController _titleController, _detailsController;
-  HwAtHome homework;
+  Homework _homework;
+  Lesson _lesson;
 
-  bool enablePeer = false, editable = false;
-  DateTime _dateNow = DateTime.now();
-  List<DateTime> _ddl = [
-    DateTime.now(),
-    null,
-    null,
-    null,
-  ];
-  List<String> peerOptions = [
-    '一评截至日期',
-    '二评截至日期',
-    '回评截至日期',
-  ];
-  List<String> summitTypeOptions = [
-    '文字',
-    '图片',
-    '语音',
-    '文档',
-  ];
-  List<bool> summitTypeChecks = [
-    false,
-    false,
-    false,
-    false,
-  ];
+  bool enablePeer = false;
+  DateTime _dateNow;
+  BaseFireBaseStore fireBaseStore;
+  List<DateTime> _ddl;
+  List<String> peerOptions;
+  List<String> summitTypeOptions;
+  List<bool> summitTypeChecks;
 
   @override
   void initState() {
     super.initState();
     _titleController = TextEditingController();
     _detailsController = TextEditingController();
+    fireBaseStore = FireBaseStore();
+    _dateNow = DateTime.now();
+    _ddl = [DateTime.now(), null, null, null];
+    peerOptions = ['一评截至日期', '二评截至日期', '回评截至日期'];
+    summitTypeOptions = ['文字', '图片', '语音', '文档'];
+    summitTypeChecks = [false, false, false, false];
   }
 
   @override
@@ -55,76 +53,48 @@ class _CreateHWPageState extends State<CreateHWPage>
     _detailsController.dispose();
   }
 
+  updateScopeHomework() {
+    ScopedModel.of<AppModel>(context).setHwCreating(_homework);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // homework = widget.homework == null
-    //     ? ScopedModel.of<AppModel>(context).hwAtHome
-    //     : widget.homework;
-    if (homework != null) {
+    _lesson = widget.currentLesson;
+    _homework = widget.homework == null
+        ? ScopedModel.of<AppModel>(context).hwCreating
+        : widget.homework;
+    if (_homework != null) {
       setState(() {
-        _titleController.text = homework.hwTitle;
-        _detailsController.text = homework.hwDescri;
-        enablePeer = homework.enablePeer;
-        _ddl = homework.ddl;
-        summitTypeChecks = homework.summitTypeChecks;
+        _titleController.text = _homework.hwTitle;
+        _detailsController.text = _homework.hwDescri;
+        enablePeer = _homework.enablePeer;
+        _ddl = _homework.ddl;
+        summitTypeChecks = _homework.summitTypeChecks;
       });
     } else {
-      homework =
-          HwAtHome(0, "", "", "", 2, 5, "", false, summitTypeChecks, _ddl);
+      setState(() {
+        _homework = Homework("assets/images/nezuko.png", "", _lesson.lessonID,
+            _lesson.lessonName, 2, 5, "", false, summitTypeChecks, _ddl,
+            hwID: new Random(DateTime.now().second)
+                .nextInt(Lesson.MAX_LESSON_ID));
+      });
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('创建作业'),
+        title: const Text('创建/编辑作业'),
         centerTitle: true,
         leading: GestureDetector(
           child: Icon(Icons.arrow_back),
-          onTap: () {
-            showDialog(
-              context: context,
-              child: AlertDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                title: Text('是否保留填写信息？'),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      // ScopedModel.of<AppModel>(context).setHwAtHome(null);
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('否'),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('是'),
-                  )
-                ],
-              ),
-            );
-          },
+          onTap: () => _leaveWhileEditing(),
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              editable ? Icons.check : Icons.edit,
-              color: editable ? Colors.green : Colors.grey,
+              Icons.check,
+              color: Colors.green,
             ),
-            onPressed: () {
-              if (editable) {
-                //TODO: 完成创建作业
-                setState(() {
-                  editable = !editable;
-                });
-              } else {
-                setState(() {
-                  editable = !editable;
-                });
-              }
-            },
+            onPressed: () => _clickCompleteEditing(),
           )
         ],
       ),
@@ -132,142 +102,198 @@ class _CreateHWPageState extends State<CreateHWPage>
         child: Container(
           margin: const EdgeInsets.all(16.0),
           alignment: Alignment.topCenter,
-          child: IgnorePointer(
-            ignoring: !editable,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextField(
-                  enabled: editable,
-                  onChanged: (text) {
-                    homework.hwTitle = text;
-                    updateScopeHomework();
-                  },
-                  controller: _titleController,
-                  decoration: const InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: '作业题目',
-                      helperText: '设定作业的题目'),
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                TextField(
-                  enabled: editable,
-                  onChanged: (text) {
-                    homework.hwDescri = text;
-                    updateScopeHomework();
-                  },
-                  controller: _detailsController,
-                  textAlign: TextAlign.start,
-                  maxLines: 4,
-                  decoration: const InputDecoration(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                onChanged: (text) {
+                  _homework.hwTitle = text;
+                  updateScopeHomework();
+                },
+                controller: _titleController,
+                decoration: const InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: '作业要求',
-                    alignLabelWithHint: true,
-                    helperText: '详细说明作业的要求',
-                  ),
+                    labelText: '作业题目',
+                    helperText: '设定作业的题目'),
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                onChanged: (text) {
+                  _homework.hwDescri = text;
+                  updateScopeHomework();
+                },
+                controller: _detailsController,
+                textAlign: TextAlign.start,
+                maxLines: 4,
+                decoration: const InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: '作业要求',
+                  alignLabelWithHint: true,
+                  helperText: '详细说明作业的要求',
                 ),
-                SizedBox(
-                  height: 5,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              AnimatedContainer(
+                decoration: const BoxDecoration(
+                  border: const Border(
+                      top: const BorderSide(width: 1, color: Colors.grey),
+                      bottom: const BorderSide(width: 1, color: Colors.grey)),
                 ),
-                AnimatedContainer(
-                  decoration: const BoxDecoration(
-                    border: const Border(
-                        top: const BorderSide(width: 1, color: Colors.grey),
-                        bottom: const BorderSide(width: 1, color: Colors.grey)),
-                  ),
+                curve: Curves.easeOutCirc,
+                child: AnimatedSize(
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeOutCirc,
-                  child: AnimatedSize(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeOutCirc,
-                    vsync: this,
-                    child: Column(
-                      children: <Widget>[
-                        Row(
+                  vsync: this,
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text('启用同伴互评'),
+                          Checkbox(
+                            value: enablePeer,
+                            onChanged: (value) {
+                              setState(() {
+                                enablePeer = !enablePeer;
+                                _homework.enablePeer = enablePeer;
+                                updateScopeHomework();
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            const Text('启用同伴互评'),
-                            Checkbox(
-                              tristate: true,
-                              value: enablePeer,
-                              onChanged: (value) {
-                                setState(() {
-                                  enablePeer = !enablePeer;
-                                  homework.enablePeer = enablePeer;
-                                  updateScopeHomework();
-                                });
+                            const Text('提交截至日期'),
+                            GestureDetector(
+                              onTap: () async {
+                                var selectedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: _dateNow,
+                                    firstDate: _dateNow,
+                                    lastDate: _dateNow.add(
+                                      const Duration(days: 30),
+                                    ));
+                                if (selectedDate != null) {
+                                  setState(() {
+                                    _ddl[0] = selectedDate;
+                                    _homework.ddl = _ddl;
+                                    updateScopeHomework();
+                                  });
+                                }
                               },
-                            )
+                              child: Text(
+                                _ddl[0] == null
+                                    ? '----\\--\\--'
+                                    : _ddl[0].toString().split(' ')[0],
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                            ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              const Text('提交截至日期'),
-                              GestureDetector(
-                                onTap: () async {
-                                  var selectedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: _dateNow,
-                                      firstDate: _dateNow,
-                                      lastDate: _dateNow.add(
-                                        const Duration(days: 30),
-                                      ));
-                                  if (selectedDate != null) {
-                                    setState(() {
-                                      _ddl[0] = selectedDate;
-                                      homework.ddl = _ddl;
-                                      updateScopeHomework();
-                                    });
-                                  }
-                                },
-                                child: Text(
-                                  _ddl[0] == null
-                                      ? '----\\--\\--'
-                                      : _ddl[0].toString().split(' ')[0],
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ),
-                            ],
+                      ),
+                      const SizedBox(height: 4.0),
+                      Visibility(
+                        visible: enablePeer,
+                        child: Container(
+                          height: 110.0,
+                          child: ListView(
+                            children: _buildPeerOptions(),
                           ),
                         ),
-                        const SizedBox(height: 4.0),
-                        Visibility(
-                          visible: enablePeer,
-                          child: Container(
-                            height: 110.0,
-                            child: ListView(
-                              children: _buildPeerOptions(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  duration: const Duration(milliseconds: 500),
                 ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                Text('作业提交形式'),
-                Wrap(
-                  alignment: WrapAlignment.spaceAround,
-                  direction: Axis.horizontal,
-                  children: _buildSummitTypeOptions(),
-                )
-              ],
-            ),
+                duration: const Duration(milliseconds: 500),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Text('作业提交形式'),
+              Wrap(
+                alignment: WrapAlignment.spaceAround,
+                direction: Axis.horizontal,
+                children: _buildSummitTypeOptions(),
+              )
+            ],
           ),
         ),
       ),
     );
   }
 
-  updateScopeHomework() {
-    // ScopedModel.of<AppModel>(context).setHwAtHome(homework);
+  _leaveWhileEditing() {
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text('是否保留填写信息？'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              ScopedModel.of<AppModel>(context).setHwCreating(null);
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            child: Text('否'),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            child: Text('是'),
+          )
+        ],
+      ),
+    );
+  }
+
+  _clickCompleteEditing() {
+    if (_checkIfFilled()) {
+      print(_homework.toJson());
+      fireBaseStore.addDocument('homework', _homework.toJson());
+      Fluttertoast.showToast(
+          msg: "创建成功",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Theme.of(context).primaryColor,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      Navigator.of(context).pop();
+    } else {
+      Fluttertoast.showToast(
+          msg: "请完整填写作业细节",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Theme.of(context).primaryColor,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  _checkIfFilled() {
+    if (_titleController.text.length == 0) return false;
+    if (_detailsController.text.length == 0) return false;
+    if (enablePeer) {
+      for (int i = 0; i < _ddl.length; i++) {
+        if (_ddl[i] == null) return false;
+      }
+    }
+    for (int i = 0; i < summitTypeChecks.length; i++) {
+      if (summitTypeChecks[i]) return true;
+    }
+    return false;
   }
 
   List<Widget> _buildSummitTypeOptions() {
@@ -298,13 +324,15 @@ class _CreateHWPageState extends State<CreateHWPage>
       if (_ddl.indexOf(f) == 0) {
         return Container();
       }
-      DateTime initial = f == null ? _dateNow : f;
+      DateTime initial = _ddl[_ddl.indexOf(f) - 1] == null
+          ? _dateNow
+          : _ddl[_ddl.indexOf(f) - 1];
       return Padding(
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text((peerOptions[_ddl.indexOf(f) - 1])),
+              Text(peerOptions[_ddl.indexOf(f) - 1]),
               GestureDetector(
                 onTap: () async {
                   var selectedDate = await showDatePicker(
@@ -317,7 +345,7 @@ class _CreateHWPageState extends State<CreateHWPage>
                   if (selectedDate != null) {
                     setState(() {
                       _ddl[_ddl.indexOf(f)] = selectedDate;
-                      homework.ddl = _ddl;
+                      _homework.ddl = _ddl;
                       updateScopeHomework();
                     });
                   }

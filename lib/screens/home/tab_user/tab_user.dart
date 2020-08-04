@@ -122,7 +122,7 @@ class _TabUserPageState extends State<TabUserPage> {
                           showSearch(
                             context: context,
                             delegate: CustomSearchDelegate(
-                              LessonNow.fetchAll(LessonNow.classID),
+                              Lesson.fetchAll(Lesson.classID),
                               user,
                             ),
                           );
@@ -160,7 +160,7 @@ class _TabUserPageState extends State<TabUserPage> {
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       children: List.generate(11, (index) {
                         return HistoryLesson(
-                            LessonNow.fetchAll(LessonNow.classID)[index]);
+                            Lesson.fetchAll(Lesson.classID)[index]);
                       }),
                     ),
                   ),

@@ -31,7 +31,7 @@ class User {
       : key = snapshot.documents[0].documentID,
         _userId = snapshot.documents[0].data['userId'],
         _fullname = snapshot.documents[0].data["fullname"],
-        _stuID = snapshot.documents[0].data["stuID"],
+        _stuID = snapshot.documents[0].data["stuId"],
         _identity = snapshot.documents[0].data["identity"];
 
   toJson() {

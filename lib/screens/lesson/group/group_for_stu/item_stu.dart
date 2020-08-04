@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:graduationapp/models/stu_card.dart';
 
 class ItemStuCard extends StatelessWidget {
-  final StudentCard stu;
+  final LessonStu stu;
 
   ItemStuCard(this.stu);
 
@@ -32,32 +32,32 @@ class ItemStuCard extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                       ),
                     )),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(stu.stuName),
-                    Text(
-                      stu.isLeader ? '组长' : ' ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(fontSize: 14.0),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Row(
-                        children: <Widget>[
-                          Text('学号: ${stu.stuID}'),
-                          Spacer(),
-                          Text('作业均分: ${stu.stuAvgScore}')
-                        ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(stu.stuName),
+                      Text(
+                        stu.isLeader ? '组长' : ' ',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(fontSize: 14.0),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Row(
+                          children: <Widget>[
+                            Text('学号: ${stu.stuNum}'),
+                            Spacer(),
+                            Text('作业均分: ${stu.stuAvgScore}')
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationapp/utils/firebase_auth.dart';
 
@@ -45,6 +46,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
+          // userId = await widget.auth.signIn(_email, _password);
           // widget.auth.sendEmailVerification();
           // _showVerifyEmailSentDialog();
           print('Signed up user: $userId');
@@ -53,7 +55,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           _isLoading = false;
         });
 
-        if (userId.length > 0 && userId != null && _isLoginForm) {
+        // if (userId.length > 0 && userId != null && _isLoginForm) {
+        if (userId.length > 0 && userId != null) {
           widget.loginCallback();
         }
       } catch (e) {
@@ -90,8 +93,15 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: _isLoading ? _showCircularProgress() : _showForm(),
-    );
+        body: Stack(
+      children: <Widget>[
+        _showForm(),
+        Visibility(
+          visible: _isLoading,
+          child: _showCircularProgress(),
+        )
+      ],
+    ));
   }
 
   Widget _showCircularProgress() {
@@ -103,7 +113,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           SizedBox(
             height: 20,
           ),
-          Text('正在验证...'),
+          Text('正在处理...'),
         ],
       ),
     );
@@ -193,12 +203,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Email',
+            hintText: '邮箱',
             icon: new Icon(
               Icons.mail,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? '请输入邮箱' : null,
         onSaved: (value) => _email = value.trim(),
       ),
     );
@@ -212,12 +222,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: '密码',
             icon: new Icon(
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? '请输入密码' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
@@ -225,8 +235,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget showSecondaryButton() {
     return new FlatButton(
-        child: new Text(
-            _isLoginForm ? 'Create an account' : 'Have an account? Sign in',
+        child: new Text(_isLoginForm ? '创建账户' : '已经拥有账户? 前往登录',
             style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
         onPressed: toggleFormMode);
   }
@@ -241,7 +250,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
-            child: new Text(_isLoginForm ? 'Login' : 'Create account',
+            child: new Text(_isLoginForm ? '登录' : '创建账户',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: validateAndSubmit,
           ),

@@ -9,7 +9,7 @@ import 'package:graduationapp/screens/homework_details/screen_hw_details.dart';
 import 'package:intl/intl.dart';
 
 class ItemHomeworkNow extends StatefulWidget {
-  final HwAtHome hwAtHome;
+  final Homework hwAtHome;
 
   ItemHomeworkNow(this.hwAtHome);
 
@@ -18,6 +18,32 @@ class ItemHomeworkNow extends StatefulWidget {
 }
 
 class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
+  DateTime dateTimeNow, currentDDL;
+  int lastDDL, hwState;
+
+  @override
+  void initState() {
+    dateTimeNow = DateTime.now();
+    currentDDL = widget.hwAtHome.ddl[0];
+    lastDDL = 0;
+    hwState = 0;
+    if (widget.hwAtHome.enablePeer) {
+      hwState++;
+      lastDDL = widget.hwAtHome.ddl.length - 1;
+      for (int i = 0; i < widget.hwAtHome.ddl.length; i++) {
+        if (dateTimeNow.isAfter(widget.hwAtHome.ddl[i])) {
+          if (i == lastDDL) {
+            continue;
+          }
+          currentDDL = widget.hwAtHome.ddl[i + 1];
+          hwState++;
+        }
+      }
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final doneStu = widget.hwAtHome.hwDoneStu;
@@ -63,29 +89,39 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Text(
-                              widget.hwAtHome.hwTitle,
-                              style: Theme.of(context).textTheme.subtitle2,
-                              maxLines: 2,
-                              overflow: TextOverflow.fade,
-                            ),
-                          ),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(widget.hwAtHome.hwLesson),
-                              SizedBox(
-                                width: 20.0,
+                              Text(
+                                '作业标题',
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
-                              HwStateText(hwState: widget.hwAtHome.hwState),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: Text(
+                                  widget.hwAtHome.hwTitle,
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                '课程',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              Text(widget.hwAtHome.lessonName),
                             ],
                           ),
                           Row(
                             children: <Widget>[
+                              HwStateText(hwState: hwState),
                               Text(
-                                DateFormat('MM-dd')
-                                    .format(widget.hwAtHome.ddl[0]),
+                                DateFormat('  -  MM-dd').format(currentDDL),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1
@@ -94,7 +130,7 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                               Text('截止',
                                   style: Theme.of(context).textTheme.bodyText1),
                               SizedBox(
-                                width: 20.0,
+                                width: 20,
                               ),
                               Text(
                                 '$doneStu',
@@ -103,7 +139,7 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                                     .bodyText1
                                     .copyWith(color: Colors.lightGreen),
                               ),
-                              Text('人已完成',
+                              Text('人已完成本阶段',
                                   style: Theme.of(context).textTheme.bodyText1),
                             ],
                           ),

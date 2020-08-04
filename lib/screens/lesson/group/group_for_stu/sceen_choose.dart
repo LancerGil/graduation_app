@@ -4,7 +4,7 @@ import 'package:graduationapp/models/stu_card.dart';
 import 'selectable_item.dart';
 
 class ChoosePage extends StatefulWidget {
-  final List<StudentCard> wholeList, selectedList;
+  final List<LessonStu> wholeList, selectedList;
 
   const ChoosePage({Key key, this.wholeList, this.selectedList})
       : super(key: key);

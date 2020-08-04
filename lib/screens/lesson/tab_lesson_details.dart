@@ -3,7 +3,8 @@ import 'package:graduationapp/models/lesson_home.dart';
 import 'package:graduationapp/screens/login/image_banner.dart';
 
 class TabLessonDetails extends StatelessWidget {
-  final LessonNow lesson;
+  final Lesson lesson;
+  final String emptyLabel = "暂未设置";
 
   TabLessonDetails({Key key, this.lesson}) : super(key: key);
 
@@ -48,20 +49,19 @@ class TabLessonDetails extends StatelessWidget {
                         MediaQuery.of(context).size.width * 0.3,
                         MediaQuery.of(context).size.width * 0.3,
                       ),
-                      SizedBox(
-                        width: 8.0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            '课程名称',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Text(
+                      Container(
+                        padding: const EdgeInsets.all(12.0),
+                        height: MediaQuery.of(context).size.width * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              '课程名称',
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Text(
                               lesson.lessonName,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -73,28 +73,55 @@ class TabLessonDetails extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 8.0,
-                          ),
-                          Text(
-                            '教师',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          Container(
-                            width: 150,
-                            child: Text(
-                              lesson.lessonTea,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .copyWith(
-                                    letterSpacing: 1,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            Spacer(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      '教师',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    Text(
+                                      lesson.lessonTea,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2
+                                          .copyWith(
+                                            letterSpacing: 1,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      '课程码',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    Text(
+                                      lesson.lessonID.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2
+                                          .copyWith(
+                                            letterSpacing: 1,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 10),
+                              ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -122,7 +149,12 @@ class TabLessonDetails extends StatelessWidget {
               '课程简介',
               style: Theme.of(context).textTheme.subtitle2,
             ),
-            Text(lesson.lessonIntro),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(lesson.lessonIntro.length != 0
+                  ? lesson.lessonIntro
+                  : emptyLabel),
+            ),
             Divider(
               thickness: 1,
             ),
@@ -130,7 +162,12 @@ class TabLessonDetails extends StatelessWidget {
               '教学计划',
               style: Theme.of(context).textTheme.subtitle2,
             ),
-            Text(lesson.lessonPlan),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(lesson.lessonPlan.length != 0
+                  ? lesson.lessonPlan
+                  : emptyLabel),
+            ),
             Divider(
               thickness: 1,
             ),
@@ -138,7 +175,12 @@ class TabLessonDetails extends StatelessWidget {
               '教学目标',
               style: Theme.of(context).textTheme.subtitle2,
             ),
-            Text(lesson.lessonTarget),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(lesson.lessonTarget.length != 0
+                  ? lesson.lessonTarget
+                  : emptyLabel),
+            ),
           ],
         ),
       ),

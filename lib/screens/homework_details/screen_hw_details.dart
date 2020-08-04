@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:graduationapp/custom_widgets/animated_size.dart';
+import 'package:graduationapp/custom_widgets/card_using_container.dart';
 import 'package:graduationapp/custom_widgets/hw_state_text.dart';
 import 'package:graduationapp/models/hw_home.dart';
 import 'package:graduationapp/models/hw_question.dart';
@@ -13,7 +14,7 @@ import 'summitsheet.dart';
 const double minSheetHeight = 120;
 
 class HomeworkPage extends StatefulWidget {
-  final HwAtHome homework;
+  final Homework homework;
   final bool hasSummited = false;
 
   HomeworkPage({Key key, this.homework}) : super(key: key);
@@ -56,7 +57,7 @@ class _HomeworkPageState extends State<HomeworkPage>
   @override
   Widget build(BuildContext context) {
     var appBar = AppBar(
-      title: Text(widget.homework.hwLesson + '的作业'),
+      title: Text(widget.homework.lessonName.toString() + '的作业'),
       centerTitle: true,
     );
     var body = SingleChildScrollView(
@@ -78,34 +79,41 @@ class _HomeworkPageState extends State<HomeworkPage>
                         .copyWith(color: Colors.black),
                   ),
                   HwStateText(hwState: widget.homework.hwState),
+                  Spacer(),
+                  RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: '截至日期：',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      TextSpan(
+                        text: widget.homework.ddl[widget.homework.hwState - 1]
+                            .toString()
+                            .split(' ')[0],
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.red),
+                      ),
+                    ]),
+                  ),
                 ]),
               ),
               SizedBox(
                 height: 3.0,
               ),
-              Container(
+              ShadowContainer(
+                padding: const EdgeInsets.all(15.0),
                 margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withAlpha(150),
-                          offset: Offset(0, 11),
-                          blurRadius: 13.0)
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                child: Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '题目',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      Text(widget.homework.hwTitle),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '题目',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    Text(widget.homework.hwTitle),
+                  ],
                 ),
               ),
               SizedBox(
@@ -116,9 +124,7 @@ class _HomeworkPageState extends State<HomeworkPage>
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.grey.withAlpha(155),
-                          offset: Offset(0, 11),
-                          blurRadius: 13.0)
+                          color: Colors.grey.withAlpha(150), blurRadius: 13.0)
                     ],
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(16.0))),

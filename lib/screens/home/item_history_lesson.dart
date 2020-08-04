@@ -5,7 +5,7 @@ import 'package:graduationapp/models/user.dart';
 import 'package:graduationapp/screens/lesson/screen_lesson.dart';
 
 class HistoryLesson extends StatelessWidget {
-  final LessonNow lesson;
+  final Lesson lesson;
 
   const HistoryLesson(this.lesson);
 

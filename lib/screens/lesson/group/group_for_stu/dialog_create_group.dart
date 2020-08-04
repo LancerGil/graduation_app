@@ -5,7 +5,7 @@ import 'package:graduationapp/models/stu_card.dart';
 import 'sceen_choose.dart';
 
 class DialogCreatGroup extends StatefulWidget {
-  List<StudentCard> memberList;
+  List<LessonStu> memberList;
   String groupName;
 
   DialogCreatGroup({Key key, this.memberList, this.groupName})
@@ -16,13 +16,13 @@ class DialogCreatGroup extends StatefulWidget {
 }
 
 class _DialogCreatGroupState extends State<DialogCreatGroup> {
-  List<StudentCard> wholeList;
+  List<LessonStu> wholeList;
 
   @override
   void initState() {
     super.initState();
     // widgetmemberList = List();
-    wholeList = StudentCard.fetchAll(LessonNow.classID);
+    wholeList = LessonStu.fetchAll(Lesson.classID);
   }
 
   @override

@@ -5,7 +5,7 @@ import 'item_stu.dart';
 
 class GridItem extends StatefulWidget {
   final Key key;
-  final StudentCard student;
+  final LessonStu student;
   final ValueChanged<bool> setSelected;
   bool isSelected;
 

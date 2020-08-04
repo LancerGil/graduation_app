@@ -9,7 +9,7 @@ import 'package:graduationapp/screens/lesson/screen_lesson.dart';
 import 'package:graduationapp/screens/login/image_banner.dart';
 
 class ItemLessonNow extends StatelessWidget {
-  final LessonNow lesson;
+  final Lesson lesson;
 
   ItemLessonNow(this.lesson);
 
@@ -21,12 +21,14 @@ class ItemLessonNow extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LessonPage(
-                      user: user,
-                      lesson: lesson,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => LessonPage(
+              user: user,
+              lesson: lesson,
+            ),
+          ),
+        );
       },
       child: Hero(
         tag: 'lesson$lessonID',
@@ -46,17 +48,22 @@ class ItemLessonNow extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        ImageBanner(lesson.lessonImagePath, 120, 120),
+                        // ImageBanner(lesson.lessonImagePath, 120, 120),
+                        ImageBanner('assets/images/nezuko.png', 120, 120),
                         SizedBox(
                           width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              child: Text(
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Text(
+                                '课程名称',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              Text(
                                 lesson.lessonName,
                                 style: Theme.of(context)
                                     .textTheme
@@ -68,16 +75,55 @@ class ItemLessonNow extends StatelessWidget {
                                 maxLines: 2,
                                 overflow: TextOverflow.fade,
                               ),
-                            ),
-                            Text(lesson.lessonTea),
-                            Row(
-                              children: <Widget>[
-                                Text('当前作业:'),
-                                SizedBox(width: 2),
-                                HwStateText(hwState: lesson.hwState),
-                              ],
-                            ),
-                          ],
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        '教师',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                      Text(lesson.lessonTea),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        '课程码',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                      Text(lesson.lessonID.toString()),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    '当前作业:',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                  SizedBox(width: 2),
+                                  HwStateText(
+                                      hwState: lesson.hwState != 6
+                                          ? lesson.hwState
+                                          : 0),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

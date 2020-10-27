@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
-class AnimeIconButton extends StatefulWidget {
-  final AnimatedIconData animatedIcons;
+class AnimatedIconButton extends StatefulWidget {
+  final IconData initalIcon, anotherIcon;
   final double size;
+  final Function doSomeThing;
+  final bool showInitAsDefault;
 
-  const AnimeIconButton({Key key, this.animatedIcons, this.size})
-      : super(key: key);
+  const AnimatedIconButton({
+    Key key,
+    this.size,
+    this.initalIcon,
+    this.anotherIcon,
+    this.doSomeThing,
+    this.showInitAsDefault,
+  }) : super(key: key);
   @override
-  _AnimeIconButtonState createState() => _AnimeIconButtonState();
+  _AnimatedIconButtonState createState() => _AnimatedIconButtonState();
 }
 
-class _AnimeIconButtonState extends State<AnimeIconButton>
+class _AnimatedIconButtonState extends State<AnimatedIconButton>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   bool isPlaying = false, isCompleted = false;
+  IconData firsIcon, secondIcon;
 
   @override
   void initState() {
     super.initState();
+    if (!widget.showInitAsDefault) {
+      firsIcon = widget.anotherIcon;
+      secondIcon = widget.initalIcon;
+    } else {
+      firsIcon = widget.initalIcon;
+      secondIcon = widget.anotherIcon;
+    }
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
   }
 
   @override
@@ -32,9 +49,35 @@ class _AnimeIconButtonState extends State<AnimeIconButton>
   Widget build(BuildContext context) {
     return IconButton(
       iconSize: widget.size,
-      icon: AnimatedIcon(
-        icon: widget.animatedIcons,
-        progress: _controller,
+      icon: Stack(
+        children: [
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Opacity(
+                opacity: 1 - _controller.value * 1,
+                child: Transform.rotate(
+                  angle: _controller.value * math.pi,
+                  child: child,
+                ),
+              );
+            },
+            child: Icon(firsIcon),
+          ),
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Opacity(
+                opacity: _controller.value * 1,
+                child: Transform.rotate(
+                  angle: math.pi - _controller.value * math.pi,
+                  child: child,
+                ),
+              );
+            },
+            child: Icon(secondIcon),
+          ),
+        ],
       ),
       onPressed: () => _handleAnime(),
     );
@@ -46,5 +89,6 @@ class _AnimeIconButtonState extends State<AnimeIconButton>
     } else {
       _controller.forward();
     }
+    widget.doSomeThing();
   }
 }

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:graduationapp/models/app_model.dart';
 import 'package:graduationapp/screen_root.dart';
-import 'package:graduationapp/screens/home/tab_user/screen_rate_comm.dart';
 import 'package:graduationapp/screens/homework_details/for_tea.dart/screen_hw_detail_tea.dart';
+import 'package:graduationapp/screens/screen_rate_comment_bloc/index.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'screens/home/screen_home.dart';
-import 'screens/home/tab_lesson/screen_create_lesson.dart';
+import 'screens/home/tab_lesson/screen_create_lesson/screen_create_lesson.dart';
 import 'screens/homework_details/create_hw.dart';
 import 'screens/lesson/group/group_for_stu/sceen_choose.dart';
-import 'screens/login/screen_login.dart';
+// import 'screens/login/screen_login.dart';
+import 'screens/setting/screen_change_pwd/index.dart';
 import 'screens/setting/screen_setting_menu.dart';
 import 'screens/sign_up/update_user_info.dart';
 import 'style.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     return ScopedModel(
       model: new AppModel(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
             dividerTheme: DividerThemeData(thickness: 1),
@@ -45,16 +47,17 @@ class MyApp extends StatelessWidget {
                 height: 45.0, buttonColor: Theme.of(context).primaryColor)),
         initialRoute: '/root',
         routes: {
-          '/root': (context) => RootPage(auth: new Auth()),
-          '/login': (context) => LoginPage(),
+          '/root': (context) => RootPage(auth: new MyAuth()),
+//          '/login': (context) => LoginPage(),
           '/signup': (context) => SignUpPage(),
           '/settings': (context) => SettingPage(),
           '/homework': (context) => HomePage(),
-          '/r_and_c': (context) => RateCommentPage(),
+          '/r_and_c': (context) => RateCommentBlocPage(),
           '/createHw': (context) => CreateHWPage(),
           '/choose': (context) => ChoosePage(),
           '/createLesson': (context) => CreateLessonPage(),
           '/hwFromTea': (context) => HwDetailForTeaPage(),
+          '/changePwd': (context) => ScreenChangePwdPage(),
         },
       ),
     );

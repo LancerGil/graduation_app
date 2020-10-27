@@ -140,6 +140,7 @@ class TabLessonDetails extends StatelessWidget {
             ),
             Text('第 ${lesson.startWeek} - ${lesson.finishWeek}  周'),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: _buildLessonPerWeek(context),
             ),
             Divider(

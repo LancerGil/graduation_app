@@ -9,7 +9,7 @@ class TabGroupForTea extends StatefulWidget {
 
 class _TabGroupForTeaState extends State<TabGroupForTea> {
   static const String OUTPORT = 'outport';
-  List<StuGroup> groups;
+  List<StuGroup> groups = [];
 
   @override
   void initState() {
@@ -18,12 +18,11 @@ class _TabGroupForTeaState extends State<TabGroupForTea> {
 
   @override
   Widget build(BuildContext context) {
-    groups = StuGroup.fetch();
     var appBar = AppBar(
       centerTitle: true,
       title: Text(
         '班级分组',
-        style: Theme.of(context).textTheme.body1.copyWith(
+        style: Theme.of(context).textTheme.bodyText2.copyWith(
               letterSpacing: 1,
               fontWeight: FontWeight.bold,
             ),

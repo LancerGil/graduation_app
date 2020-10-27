@@ -1,0 +1,176 @@
+Date : 2020-09-23 16:51:21
+Directory : d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app
+Total : 101 files,  8688 codes, 304 comments, 791 blanks, all 9783 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Dart       |         78 |      8,213 |        217 |        737 |      9,167 |
+| JSON       |          3 |        185 |          0 |          2 |        187 |
+| XML        |          8 |        120 |         41 |          9 |        170 |
+| Groovy     |          4 |         99 |          3 |         22 |        124 |
+| YAML       |          1 |         31 |         42 |          6 |         79 |
+| Markdown   |          2 |         13 |          0 |          9 |         22 |
+| Swift      |          1 |         12 |          0 |          2 |         14 |
+| Properties |          2 |         10 |          1 |          1 |         12 |
+| Kotlin     |          1 |          4 |          0 |          3 |          7 |
+| C++        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                              |        101 |      8,688 |        304 |        791 |      9,783 |
+| android                                                                                                                                        |         14 |        212 |         43 |         33 |        288 |
+| android\app                                                                                                                                    |          9 |        161 |         42 |         22 |        225 |
+| android\app\src                                                                                                                                |          7 |         63 |         39 |         10 |        112 |
+| android\app\src\debug                                                                                                                          |          1 |          4 |          3 |          1 |          8 |
+| android\app\src\main                                                                                                                           |          5 |         55 |         33 |          8 |         96 |
+| android\app\src\main\kotlin                                                                                                                    |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\kotlin\com                                                                                                                |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\kotlin\com\example                                                                                                        |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\kotlin\com\example\graduationapp                                                                                          |          1 |          4 |          0 |          3 |          7 |
+| android\app\src\main\res                                                                                                                       |          3 |         17 |         10 |          3 |         30 |
+| android\app\src\main\res\drawable                                                                                                              |          1 |          4 |          7 |          2 |         13 |
+| android\app\src\main\res\values                                                                                                                |          1 |          9 |          3 |          1 |         13 |
+| android\app\src\main\res\xml                                                                                                                   |          1 |          4 |          0 |          0 |          4 |
+| android\app\src\profile                                                                                                                        |          1 |          4 |          3 |          1 |          8 |
+| android\gradle                                                                                                                                 |          1 |          5 |          1 |          1 |          7 |
+| android\gradle\wrapper                                                                                                                         |          1 |          5 |          1 |          1 |          7 |
+| ios                                                                                                                                            |          7 |        222 |          2 |          8 |        232 |
+| ios\Runner                                                                                                                                     |          7 |        222 |          2 |          8 |        232 |
+| ios\Runner\Assets.xcassets                                                                                                                     |          3 |        148 |          0 |          4 |        152 |
+| ios\Runner\Assets.xcassets\AppIcon.appiconset                                                                                                  |          1 |        122 |          0 |          1 |        123 |
+| ios\Runner\Assets.xcassets\LaunchImage.imageset                                                                                                |          2 |         26 |          0 |          3 |         29 |
+| ios\Runner\Base.lproj                                                                                                                          |          2 |         61 |          2 |          2 |         65 |
+| lib                                                                                                                                            |         77 |      8,199 |        207 |        730 |      9,136 |
+| lib\custom_widgets                                                                                                                             |          6 |        211 |          2 |         34 |        247 |
+| lib\models                                                                                                                                     |         16 |        787 |          1 |        104 |        892 |
+| lib\screens                                                                                                                                    |         45 |      6,717 |        195 |        511 |      7,423 |
+| lib\screens\home                                                                                                                               |         12 |      1,982 |         22 |        140 |      2,144 |
+| lib\screens\home\tab_homework                                                                                                                  |          2 |        278 |          1 |         24 |        303 |
+| lib\screens\home\tab_lesson                                                                                                                    |          3 |        918 |          5 |         62 |        985 |
+| lib\screens\home\tab_user                                                                                                                      |          4 |        571 |         16 |         32 |        619 |
+| lib\screens\homework_details                                                                                                                   |         16 |      2,818 |          6 |        189 |      3,013 |
+| lib\screens\homework_details\for_tea.dart                                                                                                      |          4 |        861 |          0 |         54 |        915 |
+| lib\screens\homework_details\peer_comment                                                                                                      |          3 |        428 |          0 |         38 |        466 |
+| lib\screens\lesson                                                                                                                             |         11 |      1,249 |          9 |        121 |      1,379 |
+| lib\screens\lesson\group                                                                                                                       |          7 |        742 |          9 |         69 |        820 |
+| lib\screens\lesson\group\group_for_stu                                                                                                         |          5 |        597 |          8 |         53 |        658 |
+| lib\screens\lesson\group\group_for_tea                                                                                                         |          2 |        145 |          1 |         16 |        162 |
+| lib\screens\login                                                                                                                              |          4 |        277 |        149 |         40 |        466 |
+| lib\screens\setting                                                                                                                            |          1 |        236 |          8 |          6 |        250 |
+| lib\screens\sign_up                                                                                                                            |          1 |        155 |          1 |         15 |        171 |
+| lib\utils                                                                                                                                      |          7 |        255 |          6 |         62 |        323 |
+| test                                                                                                                                           |          1 |         14 |         10 |          7 |         31 |
++------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                                       | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\README.md                                                               | Markdown   |         10 |          0 |          7 |         17 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\build.gradle                                                | Groovy     |         58 |          3 |         12 |         73 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\google-services.json                                        | JSON       |         40 |          0 |          0 |         40 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\debug\AndroidManifest.xml                               | XML        |          4 |          3 |          1 |          8 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\AndroidManifest.xml                                | XML        |         34 |         23 |          2 |         59 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\kotlin\com\example\graduationapp\MainActivity.kt   | Kotlin     |          4 |          0 |          3 |          7 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\res\drawable\launch_background.xml                 | XML        |          4 |          7 |          2 |         13 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\res\values\styles.xml                              | XML        |          9 |          3 |          1 |         13 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\res\xml\provider_paths.xml                         | XML        |          4 |          0 |          0 |          4 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\profile\AndroidManifest.xml                             | XML        |          4 |          3 |          1 |          8 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\build.gradle                                                    | Groovy     |         28 |          0 |          5 |         33 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\gradle.properties                                               | Properties |          5 |          0 |          0 |          5 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\gradle\wrapper\gradle-wrapper.properties                        | Properties |          5 |          1 |          1 |          7 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\settings.gradle                                                 | Groovy     |         12 |          0 |          4 |         16 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\settings_aar.gradle                                             | Groovy     |          1 |          0 |          1 |          2 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\AppDelegate.swift                                            | Swift      |         12 |          0 |          2 |         14 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Assets.xcassets\AppIcon.appiconset\Contents.json             | JSON       |        122 |          0 |          1 |        123 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Assets.xcassets\LaunchImage.imageset\Contents.json           | JSON       |         23 |          0 |          1 |         24 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Assets.xcassets\LaunchImage.imageset\README.md               | Markdown   |          3 |          0 |          2 |          5 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Base.lproj\LaunchScreen.storyboard                           | XML        |         36 |          1 |          1 |         38 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Base.lproj\Main.storyboard                                   | XML        |         25 |          1 |          1 |         27 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Runner-Bridging-Header.h                                     | C++        |          1 |          0 |          0 |          1 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\animated_icon.dart                                   | Dart       |         43 |          0 |          8 |         51 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\animated_size.dart                                   | Dart       |         22 |          0 |          4 |         26 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\card_using_container.dart                            | Dart       |         29 |          0 |          4 |         33 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\hw_state_text.dart                                   | Dart       |         35 |          0 |          6 |         41 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\inherited_auth.dart                                  | Dart       |         15 |          0 |          5 |         20 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\loading_card.dart                                    | Dart       |         67 |          2 |          7 |         76 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\main.dart                                                           | Dart       |         57 |          3 |          4 |         64 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\app_model.dart                                               | Dart       |         26 |          0 |          7 |         33 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\cloud_storage_result.dart                                    | Dart       |          4 |          0 |          2 |          6 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\comment_angle.dart                                           | Dart       |         51 |          0 |          5 |         56 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\hw_home.dart                                                 | Dart       |        120 |          0 |          9 |        129 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\hw_question.dart                                             | Dart       |         46 |          0 |          7 |         53 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\hw_submit.dart                                               | Dart       |         28 |          0 |          5 |         33 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\lesson_home.dart                                             | Dart       |         99 |          0 |         11 |        110 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\lesson_stu.dart                                              | Dart       |         49 |          1 |          6 |         56 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\lesson_time.dart                                             | Dart       |         64 |          0 |          9 |         73 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\my_rate_card.dart                                            | Dart       |         26 |          0 |          3 |         29 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\peer_comment.dart                                            | Dart       |         53 |          0 |          5 |         58 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\stu_group.dart                                               | Dart       |         29 |          0 |          5 |         34 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\submission.dart                                              | Dart       |         36 |          0 |          5 |         41 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\submit_file.dart                                             | Dart       |         65 |          0 |         11 |         76 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\tea_comment.dart                                             | Dart       |         46 |          0 |          5 |         51 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\user.dart                                                    | Dart       |         45 |          0 |          9 |         54 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screen_root.dart                                                    | Dart       |        124 |          0 |         13 |        137 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\item_history_lesson.dart                               | Dart       |         65 |          0 |          5 |         70 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\screen_home.dart                                       | Dart       |         69 |          0 |          8 |         77 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\search_delegate.dart                                   | Dart       |         81 |          0 |          9 |         90 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_homework\item_homework.dart                        | Dart       |        134 |          0 |          8 |        142 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_homework\tab_home_hw.dart                          | Dart       |        144 |          1 |         16 |        161 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_lesson\item_lesson.dart                            | Dart       |        118 |          2 |          5 |        125 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_lesson\screen_create_lesson.dart                   | Dart       |        482 |          0 |         29 |        511 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_lesson\tab_home_lesson.dart                        | Dart       |        318 |          3 |         28 |        349 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\item_gotrate.dart                             | Dart       |        138 |          7 |          8 |        153 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\item_myrate.dart                              | Dart       |        138 |          7 |          8 |        153 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\screen_rate_comm.dart                         | Dart       |         56 |          0 |          8 |         64 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\tab_user.dart                                 | Dart       |        239 |          2 |          8 |        249 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\create_hw.dart                             | Dart       |        309 |          0 |         17 |        326 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\item_submission.dart          | Dart       |         84 |          0 |          7 |         91 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\screen_hw_detail_tea.dart     | Dart       |        336 |          0 |         24 |        360 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\single_submission_detail.dart | Dart       |        234 |          0 |         13 |        247 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\tea_comment_sheet.dart        | Dart       |        207 |          0 |         10 |        217 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_comment.dart                          | Dart       |        172 |          0 |         10 |        182 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_hwquestion.dart                       | Dart       |         82 |          0 |          7 |         89 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_peer_submit.dart                      | Dart       |         71 |          0 |          8 |         79 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_submit_file.dart                      | Dart       |        162 |          5 |         11 |        178 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\peer_comment\body_peercomment.dart         | Dart       |        127 |          0 |          8 |        135 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\peer_comment\item_comment_angle.dart       | Dart       |        145 |          0 |         10 |        155 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\peer_comment\screen_peercomment.dart       | Dart       |        156 |          0 |         20 |        176 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\screen_hw_details.dart                     | Dart       |        225 |          1 |         15 |        241 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\submitsheet.dart                           | Dart       |        200 |          0 |         19 |        219 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\submitsheet_body.dart                      | Dart       |        237 |          0 |          6 |        243 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\submitsheet_header.dart                    | Dart       |         71 |          0 |          4 |         75 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\dialog_create_group.dart         | Dart       |        163 |          3 |         14 |        180 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\item_stu.dart                    | Dart       |         59 |          0 |          4 |         63 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\sceen_choose.dart                | Dart       |         81 |          4 |         10 |         95 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\selectable_item.dart             | Dart       |         77 |          0 |          5 |         82 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\tab_group_stu.dart               | Dart       |        217 |          1 |         20 |        238 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_tea\item_group.dart                  | Dart       |         76 |          0 |          7 |         83 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_tea\tab_group_tea.dart               | Dart       |         69 |          1 |          9 |         79 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\screen_lesson.dart                                   | Dart       |        116 |          0 |         18 |        134 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\tab_lesson_details.dart                              | Dart       |        198 |          0 |          7 |        205 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\tab_lesson_hw.dart                                   | Dart       |        136 |          0 |         15 |        151 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\tab_lesson_members.dart                              | Dart       |         57 |          0 |         12 |         69 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\image_banner.dart                                     | Dart       |         16 |          0 |          4 |         20 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\screen_login.dart                                     | Dart       |          0 |        142 |          9 |        151 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\screen_login_signup.dart                              | Dart       |        227 |          7 |         23 |        257 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\text_section.dart                                     | Dart       |         34 |          0 |          4 |         38 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\setting\screen_setting_menu.dart                            | Dart       |        236 |          8 |          6 |        250 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\sign_up\update_user_info.dart                               | Dart       |        155 |          1 |         15 |        171 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\style.dart                                                          | Dart       |         48 |          0 |          2 |         50 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\file_man.dart                                                 | Dart       |         57 |          1 |         10 |         68 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\filebase_storage.dart                                         | Dart       |         38 |          0 |         10 |         48 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\firebase_auth.dart                                            | Dart       |         40 |          0 |         14 |         54 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\firebase_store.dart                                           | Dart       |         60 |          1 |          9 |         70 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\firebase_userinfo.dart                                        | Dart       |         40 |          4 |         13 |         57 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\flutter_toast.dart                                            | Dart       |         14 |          0 |          2 |         16 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\share_pre.dart                                                | Dart       |          6 |          0 |          4 |         10 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\pubspec.yaml                                                            | YAML       |         31 |         42 |          6 |         79 |
+| d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\test\widget_test.dart                                                   | Dart       |         14 |         10 |          7 |         31 |
+| Total                                                                                                                                          |            |      8,688 |        304 |        791 |      9,783 |
++------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

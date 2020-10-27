@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:graduationapp/custom_widgets/loading_card.dart';
+import 'package:graduationapp/custom_widgets/shadow_loading_card.dart';
 import 'package:graduationapp/models/lesson_home.dart';
-import 'package:graduationapp/models/stu_card.dart';
+import 'package:graduationapp/models/lesson_stu.dart';
 
 import 'group/group_for_stu/item_stu.dart';
 

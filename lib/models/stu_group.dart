@@ -1,19 +1,33 @@
-import 'package:graduationapp/models/stu_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StuGroup {
-  final int groupID;
-  final String groupName;
-  final List<LessonStu> members;
+  final int lessonID;
+  final String groupName, groupID;
+  final List memberUserIDs;
 
-  StuGroup(this.groupID, this.groupName, this.members);
+  StuGroup({
+    this.lessonID,
+    this.groupID = 'default groupID',
+    this.groupName,
+    this.memberUserIDs,
+  });
 
-  static fetch() {
-    List<StuGroup> groups = new List();
-    List<LessonStu> members = LessonStu.fetchAll([0, 1, 2, 3]);
-    for (int i = 0; i < 10; i++) {
-      groups..add(StuGroup(i, 'groupName-$i', members));
-    }
+  static StuGroup fromSnapshot(DocumentSnapshot snapshot) {
+    var data = snapshot.data;
+    return StuGroup(
+      lessonID: data['lessonID'],
+      groupID: snapshot.documentID,
+      groupName: data['groupName'],
+      memberUserIDs: data['memberUserIDs'],
+    );
+  }
 
-    return groups;
+  Map<String, dynamic> toJson() {
+    return {
+      'lessonID': lessonID,
+      'groupID': groupID,
+      'groupName': groupName,
+      'memberUserIDs': memberUserIDs,
+    };
   }
 }

@@ -12,10 +12,16 @@ abstract class BaseAuth {
 
   Future<void> signOut();
 
+  Future<FirebaseUser> reAuthenticateWithCredential(String email, String pwd);
+
+  Future<bool> changePassword(String password);
+
   Future<bool> isEmailVerified();
+
+  Future<bool> sendEmailToResetPwd();
 }
 
-class Auth implements BaseAuth {
+class MyAuth implements BaseAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<String> signIn(String email, String password) async {
@@ -49,5 +55,42 @@ class Auth implements BaseAuth {
   Future<bool> isEmailVerified() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.isEmailVerified;
+  }
+
+  @override
+  Future<FirebaseUser> reAuthenticateWithCredential(
+      String email, String pwd) async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    var credential =
+        EmailAuthProvider.getCredential(email: email, password: pwd);
+    AuthResult authResult = await user.reauthenticateWithCredential(credential);
+    return authResult.user;
+  }
+
+  @override
+  Future<bool> changePassword(String password) async {
+    //Create an instance of the current user.
+    FirebaseUser user = await _firebaseAuth.currentUser();
+
+    //Pass in the password to updatePassword.
+    bool result = await user.updatePassword(password).then((_) {
+      print("修改密码成功");
+      return true;
+    }).catchError((error) {
+      print("修改密码失败:" + error.toString());
+      return false;
+      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
+    });
+
+    return result;
+  }
+
+  @override
+  Future<bool> sendEmailToResetPwd() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    bool result = await _firebaseAuth
+        .sendPasswordResetEmail(email: user.email)
+        .then((value) => true);
+    return result;
   }
 }

@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:graduationapp/models/lesson_home.dart';
-import 'package:graduationapp/models/stu_card.dart';
+import 'package:graduationapp/models/lesson_stu.dart';
 
 import 'sceen_choose.dart';
 
 class DialogCreatGroup extends StatefulWidget {
-  List<LessonStu> memberList;
-  String groupName;
+  final List<LessonStu> memberList, wholeList;
+  final String groupName;
+  final Function updateGroupMemList;
+  final String stuID, groupID;
 
-  DialogCreatGroup({Key key, this.memberList, this.groupName})
+  DialogCreatGroup(
+      {Key key,
+      this.memberList,
+      this.groupName,
+      this.wholeList,
+      this.updateGroupMemList,
+      this.stuID,
+      this.groupID})
       : super(key: key);
 
   @override
@@ -16,13 +24,23 @@ class DialogCreatGroup extends StatefulWidget {
 }
 
 class _DialogCreatGroupState extends State<DialogCreatGroup> {
-  List<LessonStu> wholeList;
+  TextEditingController textEditingController;
 
   @override
   void initState() {
     super.initState();
-    // widgetmemberList = List();
-    wholeList = LessonStu.fetchAll(Lesson.classID);
+    print('当前学生id${widget.stuID}');
+    textEditingController = TextEditingController();
+    textEditingController.text = widget.groupName;
+    textEditingController.addListener(() {
+      widget.updateGroupMemList(textEditingController.text, widget.memberList);
+    });
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -33,14 +51,13 @@ class _DialogCreatGroupState extends State<DialogCreatGroup> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextField(
+            controller: textEditingController,
             decoration: InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: "小组名称",
-                prefixText: widget.groupName),
+              border: OutlineInputBorder(),
+              labelText: "小组名称",
+            ),
           ),
-          SizedBox(
-            height: 5,
-          ),
+          Divider(),
           Text(
             '小组成员-${widget.memberList.length}',
             style: Theme.of(context).textTheme.bodyText1,
@@ -48,31 +65,34 @@ class _DialogCreatGroupState extends State<DialogCreatGroup> {
           SizedBox(
             height: 5,
           ),
-          Wrap(
-            spacing: 15,
-            runSpacing: 15,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  _navigateAndDisplaySelection(context);
-                },
-                child: ClipOval(
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    color: Colors.black,
-                    child: Container(
-                      color: Colors.white,
-                      width: 55,
-                      height: 55,
-                      child: Icon(Icons.add),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    _navigateAndDisplaySelection();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipOval(
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        color: Colors.black,
+                        child: Container(
+                          color: Colors.white,
+                          width: 55,
+                          height: 55,
+                          child: Icon(Icons.add),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ]..addAll(
-                buildSelectedMembers(),
-              ),
+                ...buildSelectedMembers(),
+              ],
+            ),
           )
         ],
       ),
@@ -82,12 +102,18 @@ class _DialogCreatGroupState extends State<DialogCreatGroup> {
   List<Widget> buildSelectedMembers() {
     return widget.memberList
         .map(
-          (f) => ItemMemberSmall(assetPath: f.stuImagePath),
+          (f) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ItemMemberSmall(
+              assetPath: f.stuImagePath,
+              name: f.stuName,
+            ),
+          ),
         )
         .toList();
   }
 
-  _navigateAndDisplaySelection(BuildContext context) async {
+  _navigateAndDisplaySelection() async {
     // Navigator.push returns a Future that completes after calling
     // Navigator.pop on the Selection Screen.
     final result = await Navigator.push(
@@ -95,23 +121,25 @@ class _DialogCreatGroupState extends State<DialogCreatGroup> {
       // Create the SelectionScreen in the next step.
       MaterialPageRoute(
         builder: (context) => ChoosePage(
-          wholeList: wholeList,
+          wholeList: widget.wholeList
+            ..removeWhere((element) => element.stuNum == widget.stuID),
           selectedList: widget.memberList,
+          thisGroupID: widget.groupID,
         ),
       ),
     );
     if (result != null) {
       setState(() {
-        widget.memberList = result;
+        widget.updateGroupMemList(textEditingController.text, result);
       });
     }
   }
 }
 
 class ItemMemberSmall extends StatelessWidget {
-  final String assetPath;
+  final String assetPath, name;
 
-  const ItemMemberSmall({Key key, this.assetPath}) : super(key: key);
+  const ItemMemberSmall({Key key, this.assetPath, this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +167,7 @@ class ItemMemberSmall extends StatelessWidget {
               ),
             ),
             Text(
-              '张  三',
+              name,
               style: TextStyle(color: Colors.white),
             ),
           ],

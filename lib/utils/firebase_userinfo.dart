@@ -6,7 +6,7 @@ abstract class BaseUserInfo {
 
   Future<void> createUserInfor(User userModel);
 
-  bool isInforSetted();
+  bool isInfoSetted();
 
   Future<QuerySnapshot> getUserExtraInfor();
 }
@@ -24,7 +24,7 @@ class FireBaseUserInfor implements BaseUserInfo {
   }
 
   @override
-  bool isInforSetted() {
+  bool isInfoSetted() {
     return fireStore
             .collection('user')
             .where("userId", isEqualTo: userId)

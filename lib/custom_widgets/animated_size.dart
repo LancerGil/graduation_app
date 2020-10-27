@@ -1,17 +1,17 @@
 import 'package:flutter/widgets.dart';
 
-class MyAnimeSize extends StatefulWidget {
+class MyAnimatedSize extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final Curve curve;
 
-  const MyAnimeSize({Key key, this.child, this.duration, this.curve})
+  const MyAnimatedSize({Key key, this.child, this.duration, this.curve})
       : super(key: key);
   @override
-  _MyAnimeSizeState createState() => _MyAnimeSizeState();
+  _MyAnimatedSizeState createState() => _MyAnimatedSizeState();
 }
 
-class _MyAnimeSizeState extends State<MyAnimeSize>
+class _MyAnimatedSizeState extends State<MyAnimatedSize>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {

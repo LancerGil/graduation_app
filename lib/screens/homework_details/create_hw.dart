@@ -1,18 +1,20 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduationapp/models/app_model.dart';
 import 'package:graduationapp/models/hw_home.dart';
 import 'package:graduationapp/models/lesson_home.dart';
 import 'package:graduationapp/utils/firebase_store.dart';
+import 'package:graduationapp/utils/flutter_toast.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class CreateHWPage extends StatefulWidget {
   final Homework homework;
   final Lesson currentLesson;
+  final Function updateHomework;
 
-  const CreateHWPage({Key key, this.homework, this.currentLesson})
+  const CreateHWPage(
+      {Key key, this.homework, this.currentLesson, this.updateHomework})
       : super(key: key);
 
   @override
@@ -25,11 +27,10 @@ class _CreateHWPageState extends State<CreateHWPage>
   Homework _homework;
   Lesson _lesson;
 
-  bool enablePeer = false;
+  bool enablePeer = false, editing = false;
   DateTime _dateNow;
   BaseFireBaseStore fireBaseStore;
   List<DateTime> _ddl;
-  List<String> peerOptions;
   List<String> summitTypeOptions;
   List<bool> summitTypeChecks;
 
@@ -41,7 +42,6 @@ class _CreateHWPageState extends State<CreateHWPage>
     fireBaseStore = FireBaseStore();
     _dateNow = DateTime.now();
     _ddl = [DateTime.now(), null, null, null];
-    peerOptions = ['一评截至日期', '二评截至日期', '回评截至日期'];
     summitTypeOptions = ['文字', '图片', '语音', '文档'];
     summitTypeChecks = [false, false, false, false];
   }
@@ -60,9 +60,11 @@ class _CreateHWPageState extends State<CreateHWPage>
   @override
   Widget build(BuildContext context) {
     _lesson = widget.currentLesson;
-    _homework = widget.homework == null
-        ? ScopedModel.of<AppModel>(context).hwCreating
-        : widget.homework;
+    editing = widget.homework != null;
+    _homework = editing
+        ? widget.homework
+        : ScopedModel.of<AppModel>(context).hwCreating;
+
     if (_homework != null) {
       setState(() {
         _titleController.text = _homework.hwTitle;
@@ -74,7 +76,7 @@ class _CreateHWPageState extends State<CreateHWPage>
     } else {
       setState(() {
         _homework = Homework("assets/images/nezuko.png", "", _lesson.lessonID,
-            _lesson.lessonName, 2, 5, "", false, summitTypeChecks, _ddl,
+            _lesson.lessonName, 2, 0, "", false, summitTypeChecks, _ddl,
             hwID: new Random(DateTime.now().second)
                 .nextInt(Lesson.MAX_LESSON_ID));
       });
@@ -82,7 +84,7 @@ class _CreateHWPageState extends State<CreateHWPage>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('创建/编辑作业'),
+        title: Text(editing ? '编辑作业' : '创建作业'),
         centerTitle: true,
         leading: GestureDetector(
           child: Icon(Icons.arrow_back),
@@ -100,6 +102,7 @@ class _CreateHWPageState extends State<CreateHWPage>
       ),
       body: SingleChildScrollView(
         child: Container(
+          // height: MediaQuery.of(context).size.height,
           margin: const EdgeInsets.all(16.0),
           alignment: Alignment.topCenter,
           child: Column(
@@ -124,6 +127,7 @@ class _CreateHWPageState extends State<CreateHWPage>
                   _homework.hwDescri = text;
                   updateScopeHomework();
                 },
+                autofocus: false,
                 controller: _detailsController,
                 textAlign: TextAlign.start,
                 maxLines: 4,
@@ -171,7 +175,7 @@ class _CreateHWPageState extends State<CreateHWPage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            const Text('提交截至日期'),
+                            const Text('一稿截至日期'),
                             GestureDetector(
                               onTap: () async {
                                 var selectedDate = await showDatePicker(
@@ -202,11 +206,8 @@ class _CreateHWPageState extends State<CreateHWPage>
                       const SizedBox(height: 4.0),
                       Visibility(
                         visible: enablePeer,
-                        child: Container(
-                          height: 110.0,
-                          child: ListView(
-                            children: _buildPeerOptions(),
-                          ),
+                        child: Column(
+                          children: _buildPeerOptions(),
                         ),
                       ),
                     ],
@@ -217,12 +218,6 @@ class _CreateHWPageState extends State<CreateHWPage>
               SizedBox(
                 height: 15.0,
               ),
-              Text('作业提交形式'),
-              Wrap(
-                alignment: WrapAlignment.spaceAround,
-                direction: Axis.horizontal,
-                children: _buildSummitTypeOptions(),
-              )
             ],
           ),
         ),
@@ -260,25 +255,16 @@ class _CreateHWPageState extends State<CreateHWPage>
   _clickCompleteEditing() {
     if (_checkIfFilled()) {
       print(_homework.toJson());
-      fireBaseStore.addDocument('homework', _homework.toJson());
-      Fluttertoast.showToast(
-          msg: "创建成功",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Theme.of(context).primaryColor,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      if (editing) {
+        fireBaseStore.updateDocument(
+            'homework', _homework.docID, _homework.toJson());
+      } else {
+        fireBaseStore.addDocument('homework', _homework.toJson());
+      }
+      MyFlutterToast.showToast(editing ? "修改完成" : "创建成功", context);
       Navigator.of(context).pop();
     } else {
-      Fluttertoast.showToast(
-          msg: "请完整填写作业细节",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Theme.of(context).primaryColor,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      MyFlutterToast.showToast("请完整填写作业细节", context);
     }
   }
 
@@ -290,49 +276,21 @@ class _CreateHWPageState extends State<CreateHWPage>
         if (_ddl[i] == null) return false;
       }
     }
-    for (int i = 0; i < summitTypeChecks.length; i++) {
-      if (summitTypeChecks[i]) return true;
-    }
-    return false;
-  }
-
-  List<Widget> _buildSummitTypeOptions() {
-    return summitTypeOptions
-        .map((f) => Container(
-              width: 90.0,
-              child: Row(
-                children: <Widget>[
-                  Text(f),
-                  Checkbox(
-                    tristate: true,
-                    value: summitTypeChecks[summitTypeOptions.indexOf(f)],
-                    onChanged: (value) {
-                      setState(() {
-                        summitTypeChecks[summitTypeOptions.indexOf(f)] =
-                            !summitTypeChecks[summitTypeOptions.indexOf(f)];
-                      });
-                    },
-                  )
-                ],
-              ),
-            ))
-        .toList();
+    return true;
   }
 
   List<Widget> _buildPeerOptions() {
-    return _ddl.map((f) {
-      if (_ddl.indexOf(f) == 0) {
-        return Container();
-      }
-      DateTime initial = _ddl[_ddl.indexOf(f) - 1] == null
-          ? _dateNow
-          : _ddl[_ddl.indexOf(f) - 1];
-      return Padding(
+    List<Widget> peerOptions = [];
+    DateTime initial = _dateNow;
+    for (int i = 1; i < _ddl.length; i++) {
+      if (_ddl[i - 1] != null) initial = _ddl[i - 1];
+      peerOptions.add(
+        Padding(
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(peerOptions[_ddl.indexOf(f) - 1]),
+              Text(Homework.peerOptions[i - 1]),
               GestureDetector(
                 onTap: () async {
                   var selectedDate = await showDatePicker(
@@ -344,19 +302,24 @@ class _CreateHWPageState extends State<CreateHWPage>
                       ));
                   if (selectedDate != null) {
                     setState(() {
-                      _ddl[_ddl.indexOf(f)] = selectedDate;
+                      _ddl[i] = selectedDate;
                       _homework.ddl = _ddl;
                       updateScopeHomework();
                     });
                   }
                 },
                 child: Text(
-                  f == null ? '----\\--\\--' : f.toString().split(' ')[0],
+                  _ddl[i] == null
+                      ? '----\\--\\--'
+                      : _ddl[i].toString().split(' ')[0],
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ),
             ],
-          ));
-    }).toList();
+          ),
+        ),
+      );
+    }
+    return peerOptions;
   }
 }

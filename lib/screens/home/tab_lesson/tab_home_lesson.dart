@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationapp/custom_widgets/inherited_auth.dart';
-import 'package:graduationapp/custom_widgets/loading_card.dart';
+import 'package:graduationapp/custom_widgets/shadow_loading_card.dart';
 import 'package:graduationapp/models/lesson_home.dart';
-import 'package:graduationapp/models/stu_card.dart';
+import 'package:graduationapp/models/lesson_stu.dart';
 import 'package:graduationapp/models/user.dart';
 import 'package:graduationapp/screens/lesson/screen_lesson.dart';
 import 'package:graduationapp/utils/firebase_store.dart';
@@ -11,7 +11,7 @@ import 'package:graduationapp/utils/firebase_userinfo.dart';
 
 import '../search_delegate.dart';
 import 'item_lesson.dart';
-import 'screen_create_lesson.dart';
+import 'screen_create_lesson/screen_create_lesson.dart';
 
 class TabLessonAtHome extends StatefulWidget {
   final Function setLessonIDCallBack;
@@ -68,12 +68,11 @@ class _TabLessonAtHomeState extends State<TabLessonAtHome>
         centerTitle: true,
         actions: <Widget>[
           GestureDetector(
-            onTap: () {
-              _handleAdd(InheritedAuth.of(context).user.identity);
-            },
+            onTap: () => isLoading ? null : _handleAdd(user.identity),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.add),
+              child:
+                  isSearching ? CircularProgressIndicator() : Icon(Icons.add),
             ),
           ),
         ],
@@ -83,13 +82,12 @@ class _TabLessonAtHomeState extends State<TabLessonAtHome>
               Icons.search,
               color: Colors.grey,
             ),
-            onPressed: () => {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(
-                    lessonList, InheritedAuth.of(context).user),
-              )
-            },
+            onPressed: () => isLoading
+                ? null
+                : showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(lessonList, user),
+                  ),
           ),
         ),
       ),
@@ -107,10 +105,22 @@ class _TabLessonAtHomeState extends State<TabLessonAtHome>
   }
 
   List<Widget> buildLessonWidgets() {
-    if (lessonList != null) {
+    if (lessonList != null && lessonList.isNotEmpty) {
       return lessonList.map((oneLesson) => ItemLessonNow(oneLesson)).toList();
     }
-    return [Container()];
+    return [
+      Center(
+        child: Container(
+          child: Text(
+            user.identity == 'teacher'
+                ? '尚没有创建课程\n点击右上角\"+\"即可创建'
+                : '尚没有加入课程\n点击右上角\"+\"即可加入',
+            style: Theme.of(context).textTheme.bodyText1,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      )
+    ];
   }
 
   _handleAdd(String identity) {
@@ -132,72 +142,77 @@ class _TabLessonAtHomeState extends State<TabLessonAtHome>
     }
   }
 
+  searchLessonInDB(int lessonNum) {
+    if (this.mounted) {
+      setState(() {
+        isSearching = true;
+      });
+    }
+    _searchLesson(lessonNum).then((value) async {
+      if (this.mounted) {
+        setState(() {
+          isSearching = false;
+        });
+      }
+      if (value != null) {
+        _joinLessonOnServer(value, user);
+        getLessons();
+
+        _navitateToLessonPage(value, user);
+      } else {
+        _showLessonNotFoundDialog();
+      }
+    });
+  }
+
   _showAddLessonDialog() {
     showDialog(
         context: context,
-        child: isSearching
-            ? CircularProgressIndicator()
-            : AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                title: Text('加入课程'),
-                content: Container(
-                  height: 90,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('输入课程码',
-                          style: Theme.of(context).textTheme.bodyText1),
-                      TextField(
-                        controller: lessonNumController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(),
-                      )
-                    ],
-                  ),
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('取消'),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      int lessonNum = int.parse(lessonNumController.text);
-                      if (listOfLessonId.contains(lessonNum)) {
-                        _navitateToLessonPage(
-                          lessonList
-                              .where((element) => element.lessonID == lessonNum)
-                              .toList()[0],
-                          user,
-                        );
-                        return;
-                      }
-                      setState(() {
-                        isSearching = true;
-                      });
-                      _searchLesson(lessonNum).then((value) async {
-                        setState(() {
-                          isSearching = false;
-                        });
-                        if (value != null) {
-                          await _joinLessonOnServer(value, user);
-                          Navigator.of(context).pop();
-                          await getLessons();
-
-                          _navitateToLessonPage(value, user);
-                        } else {
-                          _showLessonNotFoundDialog();
-                        }
-                      });
-                    },
-                    child: Text('确定'),
-                  )
-                ],
-              ));
+        child: AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text('加入课程'),
+          content: Container(
+            height: 90,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('输入课程码', style: Theme.of(context).textTheme.bodyText1),
+                TextField(
+                  controller: lessonNumController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(),
+                )
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('取消'),
+            ),
+            FlatButton(
+              onPressed: () {
+                int lessonNum = int.parse(lessonNumController.text);
+                if (listOfLessonId.contains(lessonNum)) {
+                  _navitateToLessonPage(
+                    lessonList
+                        .where((element) => element.lessonID == lessonNum)
+                        .toList()[0],
+                    user,
+                  );
+                  return;
+                }
+                searchLessonInDB(lessonNum);
+                Navigator.of(context).pop();
+              },
+              child: Text('确定'),
+            )
+          ],
+        ));
   }
 
   _navitateToLessonPage(lesson, user) {
@@ -315,7 +330,7 @@ class _TabLessonAtHomeState extends State<TabLessonAtHome>
     }
   }
 
-  _joinLessonOnServer(Lesson lesson, User user) async {
+  _joinLessonOnServer(Lesson lesson, User user) {
     LessonStu lessonStu = LessonStu(
       'stuImagePath',
       user.fullname,
@@ -325,7 +340,7 @@ class _TabLessonAtHomeState extends State<TabLessonAtHome>
       user.userId,
       lesson.lessonID,
     );
-    await fireBaseStore.addDocument('lesson_stu', lessonStu.toJson());
+    fireBaseStore.addDocument('lesson_stu', lessonStu.toJson());
   }
 
   // @override

@@ -9,46 +9,29 @@ import 'package:graduationapp/screens/homework_details/screen_hw_details.dart';
 import 'package:intl/intl.dart';
 
 class ItemHomeworkNow extends StatefulWidget {
-  final Homework hwAtHome;
+  final Homework homework;
 
-  ItemHomeworkNow(this.hwAtHome);
+  ItemHomeworkNow(this.homework);
 
   @override
   _ItemHomeworkNowState createState() => _ItemHomeworkNowState();
 }
 
 class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
-  DateTime dateTimeNow, currentDDL;
-  int lastDDL, hwState;
+  double horizontalMargin, itemWidth;
 
   @override
   void initState() {
-    dateTimeNow = DateTime.now();
-    currentDDL = widget.hwAtHome.ddl[0];
-    lastDDL = 0;
-    hwState = 0;
-    if (widget.hwAtHome.enablePeer) {
-      hwState++;
-      lastDDL = widget.hwAtHome.ddl.length - 1;
-      for (int i = 0; i < widget.hwAtHome.ddl.length; i++) {
-        if (dateTimeNow.isAfter(widget.hwAtHome.ddl[i])) {
-          if (i == lastDDL) {
-            continue;
-          }
-          currentDDL = widget.hwAtHome.ddl[i + 1];
-          hwState++;
-        }
-      }
-    }
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final doneStu = widget.hwAtHome.hwDoneStu;
-    var homework = widget.hwAtHome;
+    final doneStu = widget.homework.hwDoneStu;
+    var homework = widget.homework;
     User user = InheritedAuth.of(context).user;
+    horizontalMargin = MediaQuery.of(context).size.width * 0.03;
+    MapEntry currentStatus = widget.homework.getCurrentStatus();
 
     return GestureDetector(
       onTap: () {
@@ -56,11 +39,12 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
             context,
             MaterialPageRoute(
                 builder: (context) => user.identity == "teacher"
-                    ? HwDetailForTeaPage(homework: homework)
-                    : HomeworkPage(homework: homework)));
+                    ? HwDetailForTeaPage(homework: homework, user: user)
+                    : HomeworkPage(homework: homework, user: user)));
       },
       child: Card(
-          margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+          margin:
+              EdgeInsets.fromLTRB(horizontalMargin, 10, horizontalMargin, 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
@@ -76,14 +60,14 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       SizedBox(
-                          height: 120,
-                          width: 120,
+                          height: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           child: Image.asset(
-                            widget.hwAtHome.hwAssetPath,
+                            widget.homework.hwAssetPath,
                             fit: BoxFit.cover,
                           )),
                       SizedBox(
-                        width: 10,
+                        width: MediaQuery.of(context).size.width * 0.02,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +81,9 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.5,
+                                width: MediaQuery.of(context).size.width * 0.56,
                                 child: Text(
-                                  widget.hwAtHome.hwTitle,
+                                  widget.homework.hwTitle,
                                   style: Theme.of(context).textTheme.subtitle2,
                                   maxLines: 2,
                                   overflow: TextOverflow.fade,
@@ -114,21 +98,22 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                                 '课程',
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
-                              Text(widget.hwAtHome.lessonName),
+                              Text(widget.homework.lessonName),
                             ],
                           ),
                           Row(
                             children: <Widget>[
-                              HwStateText(hwState: hwState),
+                              HwStateText(hwState: currentStatus.key),
                               Text(
-                                DateFormat('  -  MM-dd').format(currentDDL),
+                                currentStatus.value == null
+                                    ? '  -  已截止'
+                                    : DateFormat('  -  MM-dd截止')
+                                        .format(currentStatus.value),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1
                                     .copyWith(color: Colors.indigoAccent),
                               ),
-                              Text('截止',
-                                  style: Theme.of(context).textTheme.bodyText1),
                               SizedBox(
                                 width: 20,
                               ),
@@ -139,7 +124,7 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                                     .bodyText1
                                     .copyWith(color: Colors.lightGreen),
                               ),
-                              Text('人已完成本阶段',
+                              Text('人已提交',
                                   style: Theme.of(context).textTheme.bodyText1),
                             ],
                           ),
@@ -149,8 +134,6 @@ class _ItemHomeworkNowState extends State<ItemHomeworkNow> {
                   ),
                 ),
               ),
-              // GestureDetector(
-              //     child: Icon(CupertinoIcons.right_chevron), onTap: () {})
             ],
           )),
     );

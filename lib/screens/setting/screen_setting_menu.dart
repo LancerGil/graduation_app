@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:graduationapp/utils/firebase_auth.dart';
 
 class SettingPage extends StatelessWidget {
-  final VoidCallback logoutCallback;
-  final BaseAuth auth;
-
-  const SettingPage({Key key, this.logoutCallback, this.auth})
-      : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    Map args = ModalRoute.of(context).settings.arguments;
+    final BaseAuth auth = args['auth'];
+    final Function logoutCallback = args['logout'];
+
     var appbar = AppBar(
       title: Text('设置'),
     );
@@ -39,7 +37,7 @@ class SettingPage extends StatelessWidget {
                         .subtitle2
                         .copyWith(fontWeight: FontWeight.w300),
                   ),
-                  Text('更新你的昵称、邮箱和头像。',
+                  Text('更新你的昵称、头像。',
                       style: Theme.of(context).textTheme.bodyText1),
                 ],
               ),
@@ -48,23 +46,28 @@ class SettingPage extends StatelessWidget {
           Divider(
             height: 1,
           ),
-          Container(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(
-                    '安全与登录',
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle2
-                        .copyWith(fontWeight: FontWeight.w300),
-                  ),
-                  Text('更改密码并采取其他措施来加固你的帐户安全。',
-                      style: Theme.of(context).textTheme.bodyText1),
-                ],
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed('/changePwd');
+            },
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(
+                      '安全与登录',
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle2
+                          .copyWith(fontWeight: FontWeight.w300),
+                    ),
+                    Text('更改密码并采取其他措施来加固你的帐户安全。',
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ],
+                ),
               ),
             ),
           ),

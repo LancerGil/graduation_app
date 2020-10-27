@@ -1,5 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:graduationapp/custom_widgets/shadow_container.dart';
 import 'package:graduationapp/utils/firebase_auth.dart';
 
 class LoginSignupPage extends StatefulWidget {
@@ -94,6 +94,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: Stack(
+      alignment: AlignmentDirectional.center,
       children: <Widget>[
         _showForm(),
         Visibility(
@@ -106,15 +107,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget _showCircularProgress() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          CircularProgressIndicator(),
-          SizedBox(
-            height: 20,
-          ),
-          Text('正在处理...'),
-        ],
+      child: ShadowContainer(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

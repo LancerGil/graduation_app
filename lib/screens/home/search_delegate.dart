@@ -11,7 +11,7 @@ import 'tab_lesson/item_lesson.dart';
 class CustomSearchDelegate extends SearchDelegate {
   final User user;
   final List data;
-  List suggestionList;
+  List suggestionList = [];
 
   CustomSearchDelegate(this.data, this.user);
 

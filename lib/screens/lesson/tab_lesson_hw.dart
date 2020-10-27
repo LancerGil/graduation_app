@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationapp/custom_widgets/inherited_auth.dart';
-import 'package:graduationapp/custom_widgets/loading_card.dart';
+import 'package:graduationapp/custom_widgets/shadow_loading_card.dart';
 import 'package:graduationapp/models/hw_home.dart';
 import 'package:graduationapp/models/lesson_home.dart';
 import 'package:graduationapp/models/user.dart';
@@ -92,7 +92,11 @@ class _TabHomeWorkState extends State<TabHomeWork>
 
   List<Widget> buildHomeworkWidgets() {
     if (hwList != null && hwList.isNotEmpty) {
-      return hwList.map((oneHw) => ItemHomeworkNow(oneHw)).toList();
+      return hwList.map((oneHw) {
+        MapEntry currentStatus = oneHw.getCurrentStatus();
+        oneHw.hwState = currentStatus.key;
+        return ItemHomeworkNow(oneHw);
+      }).toList();
     }
     return [
       Column(
@@ -123,8 +127,7 @@ class _TabHomeWorkState extends State<TabHomeWork>
     if (documentSnapshots != null && documentSnapshots.isNotEmpty) {
       hwList
         ..addAll(documentSnapshots
-            .map<Homework>(
-                (e) => Homework.fromDocSnapshot(e)..hwLessonID = 3333)
+            .map<Homework>((e) => Homework.fromDocSnapshot(e))
             .toList());
     }
     if (this.mounted) {

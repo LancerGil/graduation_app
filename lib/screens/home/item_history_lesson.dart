@@ -4,10 +4,10 @@ import 'package:graduationapp/models/lesson_home.dart';
 import 'package:graduationapp/models/user.dart';
 import 'package:graduationapp/screens/lesson/screen_lesson.dart';
 
-class HistoryLesson extends StatelessWidget {
+class ItemHistoryLesson extends StatelessWidget {
   final Lesson lesson;
 
-  const HistoryLesson(this.lesson);
+  const ItemHistoryLesson(this.lesson);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class HistoryLesson extends StatelessWidget {
                     Container(
                         height: 110,
                         child: Image.asset(
-                          lesson.lessonImagePath,
+                          'assets/images/nezuko.png',
                           fit: BoxFit.cover,
                         )),
                     Padding(

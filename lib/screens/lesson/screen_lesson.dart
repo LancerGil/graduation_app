@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationapp/custom_widgets/inherited_auth.dart';
 import 'package:graduationapp/models/lesson_home.dart';
-import 'package:graduationapp/models/stu_card.dart';
+import 'package:graduationapp/models/lesson_stu.dart';
 import 'package:graduationapp/models/user.dart';
 import 'package:graduationapp/screens/lesson/tab_lesson_hw.dart';
 import 'package:graduationapp/screens/lesson/tab_lesson_details.dart';
@@ -27,7 +27,6 @@ class _LessonPageState extends State<LessonPage>
     with SingleTickerProviderStateMixin {
   final Lesson lesson;
   TabController _controller;
-  static const int EDIT_FROM_TEA = 6;
   List<String> tabTitles = ['课程详情', '作业记录', '小组', '课程成员'];
   List<IconData> tabIcons = [
     Icons.school,
@@ -37,7 +36,7 @@ class _LessonPageState extends State<LessonPage>
   ];
 
   BaseFireBaseStore fireBaseStore;
-  List<LessonStu> members;
+  List<LessonStu> members = [];
 
   _LessonPageState(this.lesson);
 
@@ -62,7 +61,14 @@ class _LessonPageState extends State<LessonPage>
       children: <Widget>[
         TabLessonDetails(lesson: lesson),
         TabHomeWork(currentLesson: lesson),
-        widget.user.identity == "student" ? TabGroupForStu() : TabGroupForTea(),
+        widget.user.identity == "student"
+            ? TabGroupForStu(
+                members: members,
+                lesson: lesson,
+                user: widget.user,
+                updateGroupInfo: updateGroupInfo,
+              )
+            : TabGroupForTea(),
         TabLessonMenmbers(
           membersList: members,
         ),
@@ -96,7 +102,6 @@ class _LessonPageState extends State<LessonPage>
   }
 
   _getLessonMember(Lesson lesson) async {
-    members = new List();
     List<DocumentSnapshot> listLessonStu;
 
     listLessonStu = await fireBaseStore
@@ -106,8 +111,21 @@ class _LessonPageState extends State<LessonPage>
 
     if (this.mounted) {
       setState(() {
-        members = listLessonStu.map((e) => LessonStu.fromDoc(e)).toList();
+        members = listLessonStu.map((e) => LessonStu.fromSnapshot(e)).toList();
       });
+    }
+  }
+
+  updateGroupInfo(List<LessonStu> groupMem, String groupName) async {
+    QuerySnapshot querySnapshot =
+        await fireBaseStore.doubleQueryDocuments('group', {
+      'lessonID': lesson.lessonID,
+      'groupName': groupName,
+    });
+
+    for (var lessonStu in groupMem) {
+      fireBaseStore.updateDocument('lesson_stu', lessonStu.docID,
+          {'groupID': querySnapshot.documents.first.documentID});
     }
   }
 }

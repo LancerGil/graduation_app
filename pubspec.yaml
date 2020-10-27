@@ -20,10 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
   equatable: ^1.1.1
-  path_provider: ^1.6.5
-  flutter_share: ^1.0.2+1
-  file_picker: ^1.6.0
-  open_file: ^3.0.1
+  # flutter_share: ^1.0.2+1
+  # file_picker: ^1.6.0
+  # open_file: ^3.0.1
   numberpicker: ^1.2.0
   firebase_auth: ^0.16.1
   firebase_database: ^3.1.6
@@ -33,16 +32,17 @@ dependencies:
   scoped_model: ^1.0.1
   shared_preferences: ^0.5.7+1
   fluttertoast: ^4.0.1
+  firebase_storage: ^3.1.6
+  bloc: ^6.0.3
+  flutter_bloc: ^6.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  umengshare:
-    path: ./plugin/flutter_umengshare
-
+#  umengshare:
+#    path: ./plugin/flutter_umengshare
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
   # The following line ensures that the Material Icons font is

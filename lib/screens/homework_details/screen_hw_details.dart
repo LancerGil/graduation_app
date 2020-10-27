@@ -1,23 +1,22 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:graduationapp/custom_widgets/animated_size.dart';
-import 'package:graduationapp/custom_widgets/card_using_container.dart';
 import 'package:graduationapp/custom_widgets/hw_state_text.dart';
 import 'package:graduationapp/models/hw_home.dart';
-import 'package:graduationapp/models/hw_question.dart';
-import 'package:graduationapp/models/hw_summit.dart';
-import 'package:graduationapp/screens/homework_details/item_hwquestion.dart';
+import 'package:graduationapp/models/submission.dart';
+import 'package:graduationapp/models/user.dart';
+import 'package:graduationapp/utils/firebase_store.dart';
 
-import 'item_peer_summit.dart';
-import 'summitsheet.dart';
+import 'item_peer_submit.dart';
+import 'submitsheet/submitsheet.dart';
 
 const double minSheetHeight = 120;
 
 class HomeworkPage extends StatefulWidget {
+  final User user;
   final Homework homework;
-  final bool hasSummited = false;
 
-  HomeworkPage({Key key, this.homework}) : super(key: key);
+  HomeworkPage({Key key, this.homework, this.user}) : super(key: key);
 
   @override
   _HomeworkPageState createState() => _HomeworkPageState();
@@ -25,20 +24,27 @@ class HomeworkPage extends StatefulWidget {
 
 class _HomeworkPageState extends State<HomeworkPage>
     with SingleTickerProviderStateMixin {
+  bool hasSummited = false;
   bool _folded = true;
   Duration duration = const Duration(milliseconds: 500);
-
   final Curve curve = Curves.easeOutCirc;
-  TickerProvider tp;
-  List<HWSummit> peerSummitList = [];
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
-  bool _asking = false;
+  TickerProvider tp;
+  List<Submission> peerSummitList;
+  FireBaseStore _fireBaseStore;
+  final List<String> hintOfPeerCommentModule = [
+    '该作业无需同伴互评。',
+    '提交阶段尚无需同伴互评。',
+    '请对下列同学的作业做出评估',
+  ];
 
   @override
   void initState() {
     super.initState();
     tp = this;
-    _buildPeerSummit();
+    _fireBaseStore = FireBaseStore();
+    _getPeerSubmission();
   }
 
   @override
@@ -46,16 +52,25 @@ class _HomeworkPageState extends State<HomeworkPage>
     super.dispose();
   }
 
-  _buildPeerSummit() async {
-    var list = await HWSummit.fetch(3);
-    print('-----------HWSummit.fetch------------$list');
-    setState(() {
-      peerSummitList = list;
-    });
+  _getPeerSubmission() async {
+    print('-----------getting Submission from DB------------');
+    QuerySnapshot querySnapshot = await _fireBaseStore.queryDocuments(
+        'submission', MapEntry('hwID', widget.homework.hwID));
+    if (querySnapshot.documents != null && querySnapshot.documents.isNotEmpty) {
+      peerSummitList = querySnapshot.documents
+          .map<Submission>((e) => Submission.fromSnapshot(e))
+          .toList();
+    } else {
+      peerSummitList = [];
+    }
+    if (this.mounted) setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    MapEntry currentStatus = widget.homework.getCurrentStatus();
+    Map ableOrNot = widget.homework.getWhatIsAble();
+
     var appBar = AppBar(
       title: Text(widget.homework.lessonName.toString() + '的作业'),
       centerTitle: true,
@@ -72,13 +87,13 @@ class _HomeworkPageState extends State<HomeworkPage>
                 padding: EdgeInsets.all(16.0),
                 child: Row(children: <Widget>[
                   Text(
-                    '当前阶段:  ',
+                    '当前状态:  ',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
                         .copyWith(color: Colors.black),
                   ),
-                  HwStateText(hwState: widget.homework.hwState),
+                  HwStateText(hwState: currentStatus.key),
                   Spacer(),
                   RichText(
                     text: TextSpan(children: [
@@ -87,9 +102,9 @@ class _HomeworkPageState extends State<HomeworkPage>
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       TextSpan(
-                        text: widget.homework.ddl[widget.homework.hwState - 1]
-                            .toString()
-                            .split(' ')[0],
+                        text: currentStatus.value == null
+                            ? '已截止'
+                            : currentStatus.value.toString().split(' ')[0],
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -102,25 +117,10 @@ class _HomeworkPageState extends State<HomeworkPage>
               SizedBox(
                 height: 3.0,
               ),
-              ShadowContainer(
-                padding: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '题目',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    Text(widget.homework.hwTitle),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
               AnimatedContainer(
-                margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                duration: duration,
+                curve: curve,
+                margin: const EdgeInsets.symmetric(horizontal: 15.0),
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -133,6 +133,11 @@ class _HomeworkPageState extends State<HomeworkPage>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        Text(
+                          '题目',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(widget.homework.hwTitle),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -168,11 +173,9 @@ class _HomeworkPageState extends State<HomeworkPage>
                         ),
                       ],
                     )),
-                duration: duration,
-                curve: curve,
               ),
               SizedBox(
-                height: 15.0,
+                height: 10.0,
               ),
               Divider(
                 indent: 16,
@@ -180,90 +183,34 @@ class _HomeworkPageState extends State<HomeworkPage>
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('作业答疑：'),
-                        Text(
-                          '对作业要求有疑问？大胆向老师提出疑问',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        )
-                      ],
-                    ),
-                    RaisedButton(
-                      elevation: 8,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      onPressed: () {
-                        setState(() {
-                          _asking = !_asking;
-                          if (!_asking) {
-                            //TODO: 提交疑问。
-                          }
-                        });
-                      },
-                      child: Text(
-                        _asking ? "取消" : '提问',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Theme.of(context).primaryColor,
-                    )
-                  ],
-                ),
-              ),
-              MyAnimeSize(
-                duration: duration,
-                curve: curve,
-                child: Visibility(
-                    visible: _asking,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 16),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: '写下你的疑惑'),
-                      ),
-                    )),
-              ),
-              AnimatedContainer(
-                duration: duration,
-                curve: curve,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _buildHwQuestions(),
-                  ),
-                ),
-              ),
-              Divider(
-                indent: 16,
-                endIndent: 16,
+                child: Text('同伴互评任务'),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Text('同伴互评：'),
-              ),
-              SizedBox(
-                height: 15.0,
+                child: Text(
+                  currentStatus.key == 0
+                      ? hintOfPeerCommentModule[0]
+                      : ableOrNot['giveComment']
+                          ? hintOfPeerCommentModule[2]
+                          : hintOfPeerCommentModule[1],
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
               Visibility(
-                visible: widget.homework.hwState != 1,
+                visible: ableOrNot['giveComment'],
                 child: Column(
-                  children: _buildPeerSummitsWidgets(peerSummitList),
+                  children: peerSummitList == null
+                      ? [
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: CircularProgressIndicator(),
+                          )
+                        ]
+                      : _buildPeerSummitsWidgets(peerSummitList),
                 ),
               ),
-              Visibility(
-                  visible: widget.homework.hwState == 1,
-                  child: Text(
-                    '提交阶段尚无需同伴评估。',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  )),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.16,
+                height: MediaQuery.of(context).size.height * 0.2,
               )
             ]
             // ..add(Spacer()),
@@ -272,40 +219,29 @@ class _HomeworkPageState extends State<HomeworkPage>
     );
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: appBar,
       body: body,
-      floatingActionButton: SummitSheet(),
+      floatingActionButton: SubmitSheet(
+        scaffoldKey: _scaffoldKey,
+        user: widget.user,
+        homework: widget.homework,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  List<Widget> _buildPeerSummitsWidgets(List<HWSummit> summits) {
-    return summits.map((f) => ItemPeerSummit(summit: f)).toList();
-  }
-
-  List<Widget> _buildHwQuestions() {
-    List questions = HWQuestion.fetch(4);
-    // List questions = [];
-    return questions.length == 0
-        ? [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  '尚无学生提问',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ),
-          ]
-        : questions
-            .map(
-              (f) => ItemHWQuestion(
-                question: f,
-              ),
-            )
-            .toList();
+  List<Widget> _buildPeerSummitsWidgets(List<Submission> submissions) {
+    return submissions.map((f) {
+      if (f.userID != widget.user.userId) {
+        return ItemPeerSubmit(
+          submission: f,
+          user: widget.user,
+          homework: widget.homework,
+        );
+      } else {
+        return Container();
+      }
+    }).toList();
   }
 }

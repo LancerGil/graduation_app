@@ -49,7 +49,7 @@ class _ItemGroupsState extends State<ItemGroups>
             Row(
               children: <Widget>[
                 Text(
-                  '${widget.group.groupID + 1} - ' + widget.group.groupName,
+                  '${widget.group.groupID} - ' + widget.group.groupName,
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
                 Spacer(),
@@ -73,10 +73,9 @@ class _ItemGroupsState extends State<ItemGroups>
   }
 
   _buildMembers() {
-    return widget.group.members
+    return widget.group.memberUserIDs
         .map((f) => ListTile(
-              title: Text(f.stuName),
-              subtitle: f.isLeader ? Text('组长 ${f.stuID}') : Text('${f.stuID}'),
+              title: Text('f.stuName'),
             ))
         .toList();
   }

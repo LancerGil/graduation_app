@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:graduationapp/custom_widgets/hw_state_text.dart';
 import 'package:graduationapp/custom_widgets/inherited_auth.dart';
 import 'package:graduationapp/models/lesson_home.dart';
 import 'package:graduationapp/models/user.dart';
@@ -106,20 +105,6 @@ class ItemLessonNow extends StatelessWidget {
                                     ],
                                   ),
                                   SizedBox(width: 10),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                    '当前作业:',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                  SizedBox(width: 2),
-                                  HwStateText(
-                                      hwState: lesson.hwState != 6
-                                          ? lesson.hwState
-                                          : 0),
                                 ],
                               ),
                             ],

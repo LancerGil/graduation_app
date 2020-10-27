@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class HwStateText extends StatelessWidget {
   final List<String> _hWStateCN = [
     '无互评作业',
-    '提交阶段',
+    '一稿阶段',
     '一评阶段',
+    '二稿阶段',
     '二评阶段',
-    '回评阶段',
     '师评阶段',
     '已结束',
   ];

@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationapp/custom_widgets/inherited_auth.dart';
-import 'package:graduationapp/custom_widgets/loading_card.dart';
+import 'package:graduationapp/custom_widgets/shadow_loading_card.dart';
 import 'package:graduationapp/models/hw_home.dart';
 import 'package:graduationapp/models/lesson_home.dart';
+import 'package:graduationapp/models/user.dart';
 import 'package:graduationapp/screens/home/search_delegate.dart';
 import 'package:graduationapp/utils/firebase_store.dart';
 
@@ -45,6 +46,8 @@ class _TabHWatHomeState extends State<TabHWatHome>
 
   @override
   Widget build(BuildContext context) {
+    User user = InheritedAuth.of(context).user;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('作业'),
@@ -55,18 +58,19 @@ class _TabHWatHomeState extends State<TabHWatHome>
               Icons.search,
               color: Colors.grey,
             ),
-            onPressed: () => {
-              showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(
-                      hwList, InheritedAuth.of(context).user))
-            },
+            onPressed: () => isLoading
+                ? null
+                : showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(hwList, user)),
           ),
         ),
       ),
       body: ListView(
         key: PageStorageKey("hwScroll"),
-        children: isLoading ? _showLoadingAnimation() : buildHomeworkWidgets(),
+        children: isLoading
+            ? _showLoadingAnimation()
+            : buildHomeworkWidgets(user.identity),
       ),
     );
   }
@@ -77,55 +81,42 @@ class _TabHWatHomeState extends State<TabHWatHome>
         .toList();
   }
 
-  List<Widget> buildHomeworkWidgets() {
+  List<Widget> buildHomeworkWidgets(String identity) {
+    List<Widget> result = [];
     if (hwList != null && hwList.isNotEmpty) {
-      DateTime dateTimeNow;
-      int currentState;
-      for (var hw in hwList) {
-        dateTimeNow = DateTime.now();
-        currentState = 0;
-        if (hw.enablePeer) {
-          currentState++;
-          for (int i = 0; i < hw.ddl.length; i++) {
-            if (dateTimeNow.isAfter(hw.ddl[i])) {
-              currentState++;
-              if (i == hw.ddl.length - 1) {
-                continue;
-              }
-            }
-          }
+      for (var oneHw in hwList) {
+        MapEntry currentStatus = oneHw.getCurrentStatus();
+        oneHw.hwState = currentStatus.key;
+        if (identity == 'teacher'
+            ? currentStatus.key < 7
+            : currentStatus.key < 6) {
+          MapEntry hwState = oneHw.getCurrentStatus();
+          if (hwState.value != null) result.add(ItemHomeworkNow(oneHw));
         }
-        hw.hwState = currentState;
       }
-      return hwList.map((oneHw) {
-        if (oneHw.hwState > 0 && oneHw.hwState < 5)
-          return ItemHomeworkNow(oneHw);
-        else
-          return Container();
-      }).toList();
     }
-    return [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(
-            height: 30,
-          ),
-          Icon(
-            Icons.library_books,
-            size: 80,
-            color: Colors.grey,
-          ),
-          // SizedBox(
-          //   height: 10,
-          // ),
-          Text(
-            "暂时没有进行中的作业",
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-        ],
-      )
-    ];
+    if (result.isEmpty) {
+      return [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 30,
+            ),
+            Icon(
+              Icons.library_books,
+              size: 80,
+              color: Colors.grey,
+            ),
+            Text(
+              "暂时没有进行中的作业",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ],
+        )
+      ];
+    } else
+      return result;
   }
 
   getActivatedHomework() async {

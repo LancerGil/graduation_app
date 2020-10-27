@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduationapp/screens/home/tab_user/tab_user.dart';
+import 'package:graduationapp/custom_widgets/inherited_auth.dart';
+import 'package:graduationapp/models/user.dart';
+import 'package:graduationapp/screens/home/tab_user_bloc/index.dart';
 
 import 'tab_homework/tab_home_hw.dart';
 import 'tab_lesson/tab_home_lesson.dart';
@@ -15,6 +17,7 @@ class _HomePageState extends State<HomePage>
   var appBarTitle = ['课程', '作业', '我的'];
   TabController _tabController;
   List<int> lessonID;
+  User user;
 
   @override
   void initState() {
@@ -30,15 +33,14 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    user = InheritedAuth.of(context).user;
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
           TabLessonAtHome(setLessonIDCallBack: setLessonIDCallBack),
-          TabHWatHome(
-            lessonID: lessonID,
-          ),
-          TabUserPage(),
+          TabHWatHome(lessonID: lessonID),
+          TabUserBlocPage(user: user),
         ],
       ),
       bottomNavigationBar: TabBar(

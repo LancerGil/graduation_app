@@ -1,110 +1,96 @@
-"filename", "language", "YAML", "Dart", "Groovy", "Properties", "Markdown", "C++", "Swift", "XML", "JSON", "Ruby", "Batch", "Objective-C", "Java", "Shell Script", "comment", "blank", "total"
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/README.md", "Markdown", 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 17
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/build.gradle", "Groovy", 0, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 12, 73
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/google-services.json", "JSON", 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 40
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/src/debug/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 3, 1, 8
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/src/main/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 20, 2, 51
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/src/main/res/drawable/launch_background.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 2, 13
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/src/main/res/values/styles.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 2, 1, 9
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/src/main/res/xml/provider_paths.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/app/src/profile/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 3, 1, 8
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/build.gradle", "Groovy", 0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 33
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/gradle.properties", "Properties", 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/gradle/wrapper/gradle-wrapper.properties", "Properties", 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/settings.gradle", "Groovy", 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 16
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/android/settings_aar.gradle", "Groovy", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/AppDelegate.swift", "Swift", 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json", "JSON", 0, 0, 0, 0, 0, 0, 0, 0, 122, 0, 0, 0, 0, 0, 0, 1, 123
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json", "JSON", 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 1, 24
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md", "Markdown", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/Base.lproj/LaunchScreen.storyboard", "XML", 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 1, 1, 38
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/Base.lproj/Main.storyboard", "XML", 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 1, 1, 27
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/ios/Runner/Runner-Bridging-Header.h", "C++", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/custom_widgets/animated_icon.dart", "Dart", 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 51
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/custom_widgets/animated_size.dart", "Dart", 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 26
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/custom_widgets/card_using_container.dart", "Dart", 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 29
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/custom_widgets/hw_state_text.dart", "Dart", 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 41
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/custom_widgets/inherited_auth.dart", "Dart", 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 20
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/custom_widgets/loading_card.dart", "Dart", 0, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 76
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/main.dart", "Dart", 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 63
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/app_model.dart", "Dart", 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 33
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/hw_home.dart", "Dart", 0, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 60
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/hw_question.dart", "Dart", 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 27
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/hw_summit.dart", "Dart", 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 33
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/lesson_home.dart", "Dart", 0, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 109
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/lesson_time.dart", "Dart", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 73
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/my_rate_card.dart", "Dart", 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 29
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/stu_card.dart", "Dart", 0, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 59
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/stu_group.dart", "Dart", 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 20
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/summit_file.dart", "Dart", 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 76
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/models/user.dart", "Dart", 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 54
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screen_root.dart", "Dart", 0, 124, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 137
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/item_history_lesson.dart", "Dart", 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 70
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/screen_home.dart", "Dart", 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 65
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/search_delegate.dart", "Dart", 0, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 90
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_homework/item_homework.dart", "Dart", 0, 115, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6, 123
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_homework/tab_home_hw.dart", "Dart", 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 68
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_lesson/item_lesson.dart", "Dart", 0, 132, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 139
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_lesson/screen_create_lesson.dart", "Dart", 0, 483, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 512
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_lesson/tab_home_lesson.dart", "Dart", 0, 290, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 28, 320
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_user/item_gotrate.dart", "Dart", 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 153
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_user/item_myrate.dart", "Dart", 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 153
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_user/screen_rate_comm.dart", "Dart", 0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 64
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/home/tab_user/tab_user.dart", "Dart", 0, 239, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 249
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/create_hw.dart", "Dart", 0, 311, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 17, 329
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/for_tea.dart/screen_hw_detail_tea.dart", "Dart", 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 148
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/item_hwquestion.dart", "Dart", 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 89
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/item_peer_summit.dart", "Dart", 0, 227, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 12, 243
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/item_summit_file.dart", "Dart", 0, 162, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 173
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/screen_hw_details.dart", "Dart", 0, 293, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 16, 312
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/homework_details/summitsheet.dart", "Dart", 0, 195, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 20, 216
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_stu/dialog_create_group.dart", "Dart", 0, 134, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 13, 151
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_stu/item_stu.dart", "Dart", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 68
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_stu/sceen_choose.dart", "Dart", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, 74
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_stu/selectable_item.dart", "Dart", 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 48
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_stu/tab_group_stu.dart", "Dart", 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10, 131
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_tea/item_group.dart", "Dart", 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 82
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/group/group_for_tea/tab_group_tea.dart", "Dart", 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 80
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/screen_lesson.dart", "Dart", 0, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 112
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/tab_lesson_details.dart", "Dart", 0, 198, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 205
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/tab_lesson_hw.dart", "Dart", 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 65
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/lesson/tab_lesson_members.dart", "Dart", 0, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 69
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/login/image_banner.dart", "Dart", 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/login/screen_login.dart", "Dart", 0, 133, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 151
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/login/screen_login_signup.dart", "Dart", 0, 230, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 23, 260
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/login/text_section.dart", "Dart", 0, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 38
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/setting/screen_setting_menu.dart", "Dart", 0, 236, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 6, 250
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/screens/sign_up/update_user_info.dart", "Dart", 0, 155, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15, 171
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/style.dart", "Dart", 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 50
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/utils/file_man.dart", "Dart", 0, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10, 68
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/utils/firebase_auth.dart", "Dart", 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 54
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/utils/firebase_store.dart", "Dart", 0, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 44
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/utils/firebase_userinfo.dart", "Dart", 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 13, 57
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/lib/utils/share_pre.dart", "Dart", 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 10
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/CHANGELOG.md", "Markdown", 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/README.md", "Markdown", 0, 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 91
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 3, 4, 26
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/build.gradle", "Groovy", 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 7, 44
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/gradle.properties", "Properties", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/gradlew.bat", "Batch", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 24, 85
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/settings.gradle", "Groovy", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 52, 0, 0, 0, 0, 0, 0, 3, 4, 59
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/java/cn/ugle/flutter/umengshare/UmengshareActionListener.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 0, 9, 46
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/java/cn/ugle/flutter/umengshare/UmengsharePlugin.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 235, 0, 6, 23, 264
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/java/cn/ugle/flutter/umengshare/wxapi/WXEntryActivity.java", "Java", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 3, 7
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/drawable/umeng_socialize_btn_bg.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 3, 11
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/drawable/umeng_socialize_edit_bg.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 3, 11
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/layout/socialize_share_menu_item.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 3, 25
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/layout/umeng_socialize_oauth_dialog.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 0, 8, 17, 121
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/layout/umeng_socialize_share.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 0, 0, 12, 137
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/values/umeng_socialize_shareview_strings.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 1, 10
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/android/src/main/res/values/umeng_socialize_style.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 57, 11, 82
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/ios/Classes/UmengsharePlugin.h", "C++", 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 6
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/ios/Classes/UmengsharePlugin.m", "Objective-C", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 249, 0, 0, 27, 17, 293
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/ios/Flutter/flutter_export_environment.sh", "Shell Script", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 2, 1, 11
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/ios/umengshare.podspec", "Ruby", 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 5, 2, 29
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/lib/umengshare.dart", "Dart", 0, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97, 2, 151
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/plugin/flutter_umengshare/pubspec.yaml", "YAML", 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 5, 51
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/pubspec.yaml", "YAML", 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 8, 79
-"/home/soi/Documents/GraduationProgram/Programs/graduation_app/test/widget_test.dart", "Dart", 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 31
-"Total", "-", 45, 6226, 133, 11, 77, 6, 12, 446, 185, 22, 61, 249, 295, 8, 409, 801, 8986
+"filename", "language", "YAML", "Groovy", "Properties", "Dart", "Markdown", "Swift", "C++", "JSON", "XML", "comment", "blank", "total"
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\README.md", "Markdown", 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 7, 17
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\build.gradle", "Groovy", 0, 58, 0, 0, 0, 0, 0, 0, 0, 3, 12, 73
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\google-services.json", "JSON", 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 40
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\debug\AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 1, 8
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 29, 20, 2, 51
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\res\drawable\launch_background.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 4, 7, 2, 13
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\res\values\styles.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 1, 9
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\main\res\xml\provider_paths.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\app\src\profile\AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 1, 8
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\build.gradle", "Groovy", 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 5, 33
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\gradle.properties", "Properties", 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 5
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\gradle\wrapper\gradle-wrapper.properties", "Properties", 0, 0, 5, 0, 0, 0, 0, 0, 0, 1, 1, 7
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\settings.gradle", "Groovy", 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 4, 16
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\android\settings_aar.gradle", "Groovy", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\AppDelegate.swift", "Swift", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 2, 14
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Assets.xcassets\AppIcon.appiconset\Contents.json", "JSON", 0, 0, 0, 0, 0, 0, 0, 122, 0, 0, 1, 123
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Assets.xcassets\LaunchImage.imageset\Contents.json", "JSON", 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 1, 24
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Assets.xcassets\LaunchImage.imageset\README.md", "Markdown", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 5
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Base.lproj\LaunchScreen.storyboard", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 36, 1, 1, 38
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Base.lproj\Main.storyboard", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 25, 1, 1, 27
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\ios\Runner\Runner-Bridging-Header.h", "C++", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\animated_icon.dart", "Dart", 0, 0, 0, 43, 0, 0, 0, 0, 0, 0, 8, 51
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\animated_size.dart", "Dart", 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 4, 26
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\card_using_container.dart", "Dart", 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 4, 33
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\hw_state_text.dart", "Dart", 0, 0, 0, 35, 0, 0, 0, 0, 0, 0, 6, 41
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\inherited_auth.dart", "Dart", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 5, 20
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\custom_widgets\loading_card.dart", "Dart", 0, 0, 0, 67, 0, 0, 0, 0, 0, 2, 7, 76
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\main.dart", "Dart", 0, 0, 0, 57, 0, 0, 0, 0, 0, 3, 4, 64
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\app_model.dart", "Dart", 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 7, 33
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\cloud_storage_result.dart", "Dart", 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 2, 6
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\hw_home.dart", "Dart", 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 9, 129
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\hw_question.dart", "Dart", 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 7, 53
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\hw_submit.dart", "Dart", 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 5, 33
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\lesson_home.dart", "Dart", 0, 0, 0, 99, 0, 0, 0, 0, 0, 0, 11, 110
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\lesson_stu.dart", "Dart", 0, 0, 0, 49, 0, 0, 0, 0, 0, 1, 6, 56
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\lesson_time.dart", "Dart", 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 9, 73
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\my_rate_card.dart", "Dart", 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 3, 29
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\peer_comment.dart", "Dart", 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 5, 58
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\stu_group.dart", "Dart", 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 5, 34
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\submission.dart", "Dart", 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 5, 41
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\submit_file.dart", "Dart", 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 11, 76
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\tea_comment.dart", "Dart", 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 5, 51
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\models\user.dart", "Dart", 0, 0, 0, 45, 0, 0, 0, 0, 0, 0, 9, 54
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screen_root.dart", "Dart", 0, 0, 0, 124, 0, 0, 0, 0, 0, 0, 13, 137
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\item_history_lesson.dart", "Dart", 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 5, 70
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\screen_home.dart", "Dart", 0, 0, 0, 69, 0, 0, 0, 0, 0, 0, 8, 77
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\search_delegate.dart", "Dart", 0, 0, 0, 81, 0, 0, 0, 0, 0, 0, 9, 90
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_homework\item_homework.dart", "Dart", 0, 0, 0, 134, 0, 0, 0, 0, 0, 0, 8, 142
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_homework\tab_home_hw.dart", "Dart", 0, 0, 0, 144, 0, 0, 0, 0, 0, 1, 16, 161
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_lesson\item_lesson.dart", "Dart", 0, 0, 0, 118, 0, 0, 0, 0, 0, 16, 5, 139
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_lesson\screen_create_lesson.dart", "Dart", 0, 0, 0, 482, 0, 0, 0, 0, 0, 0, 29, 511
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_lesson\tab_home_lesson.dart", "Dart", 0, 0, 0, 318, 0, 0, 0, 0, 0, 3, 28, 349
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\item_gotrate.dart", "Dart", 0, 0, 0, 138, 0, 0, 0, 0, 0, 7, 8, 153
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\item_myrate.dart", "Dart", 0, 0, 0, 138, 0, 0, 0, 0, 0, 7, 8, 153
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\screen_rate_comm.dart", "Dart", 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 8, 64
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\home\tab_user\tab_user.dart", "Dart", 0, 0, 0, 239, 0, 0, 0, 0, 0, 2, 8, 249
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\create_hw.dart", "Dart", 0, 0, 0, 309, 0, 0, 0, 0, 0, 0, 17, 326
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\item_submission.dart", "Dart", 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 7, 83
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\screen_hw_detail_tea.dart", "Dart", 0, 0, 0, 336, 0, 0, 0, 0, 0, 0, 24, 360
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\single_submission_detail.dart", "Dart", 0, 0, 0, 231, 0, 0, 0, 0, 0, 0, 13, 244
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\for_tea.dart\tea_comment_sheet.dart", "Dart", 0, 0, 0, 207, 0, 0, 0, 0, 0, 0, 10, 217
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_comment.dart", "Dart", 0, 0, 0, 167, 0, 0, 0, 0, 0, 0, 10, 177
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_hwquestion.dart", "Dart", 0, 0, 0, 82, 0, 0, 0, 0, 0, 0, 7, 89
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_peer_submit.dart", "Dart", 0, 0, 0, 216, 0, 0, 0, 0, 0, 0, 14, 230
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\item_submit_file.dart", "Dart", 0, 0, 0, 162, 0, 0, 0, 0, 0, 5, 11, 178
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\screen_hw_details.dart", "Dart", 0, 0, 0, 225, 0, 0, 0, 0, 0, 1, 15, 241
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\homework_details\submitsheet.dart", "Dart", 0, 0, 0, 415, 0, 0, 0, 0, 0, 1, 24, 440
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\dialog_create_group.dart", "Dart", 0, 0, 0, 163, 0, 0, 0, 0, 0, 3, 14, 180
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\item_stu.dart", "Dart", 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 4, 63
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\sceen_choose.dart", "Dart", 0, 0, 0, 81, 0, 0, 0, 0, 0, 4, 10, 95
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\selectable_item.dart", "Dart", 0, 0, 0, 77, 0, 0, 0, 0, 0, 0, 5, 82
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_stu\tab_group_stu.dart", "Dart", 0, 0, 0, 211, 0, 0, 0, 0, 0, 1, 19, 231
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_tea\item_group.dart", "Dart", 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 7, 83
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\group\group_for_tea\tab_group_tea.dart", "Dart", 0, 0, 0, 69, 0, 0, 0, 0, 0, 1, 9, 79
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\screen_lesson.dart", "Dart", 0, 0, 0, 116, 0, 0, 0, 0, 0, 0, 18, 134
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\tab_lesson_details.dart", "Dart", 0, 0, 0, 198, 0, 0, 0, 0, 0, 0, 7, 205
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\tab_lesson_hw.dart", "Dart", 0, 0, 0, 136, 0, 0, 0, 0, 0, 0, 15, 151
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\lesson\tab_lesson_members.dart", "Dart", 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 12, 69
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\image_banner.dart", "Dart", 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 4, 20
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\screen_login.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 142, 9, 151
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\screen_login_signup.dart", "Dart", 0, 0, 0, 227, 0, 0, 0, 0, 0, 7, 23, 257
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\login\text_section.dart", "Dart", 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 4, 38
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\setting\screen_setting_menu.dart", "Dart", 0, 0, 0, 236, 0, 0, 0, 0, 0, 8, 6, 250
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\screens\sign_up\update_user_info.dart", "Dart", 0, 0, 0, 155, 0, 0, 0, 0, 0, 1, 15, 171
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\style.dart", "Dart", 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 2, 50
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\file_man.dart", "Dart", 0, 0, 0, 57, 0, 0, 0, 0, 0, 1, 10, 68
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\filebase_storage.dart", "Dart", 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 10, 48
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\firebase_auth.dart", "Dart", 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 14, 54
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\firebase_store.dart", "Dart", 0, 0, 0, 60, 0, 0, 0, 0, 0, 1, 9, 70
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\firebase_userinfo.dart", "Dart", 0, 0, 0, 40, 0, 0, 0, 0, 0, 4, 13, 57
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\flutter_toast.dart", "Dart", 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 2, 16
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\lib\utils\share_pre.dart", "Dart", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 4, 10
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\pubspec.yaml", "YAML", 31, 0, 0, 0, 0, 0, 0, 0, 0, 42, 6, 79
+"d:\user\DOCUMENTS\Graduation\GraduationProgram\Programs\graduation_app\test\widget_test.dart", "Dart", 0, 0, 0, 14, 0, 0, 0, 0, 0, 10, 7, 31
+"Total", "-", 31, 99, 10, 7764, 13, 12, 1, 185, 112, 315, 745, 9287
